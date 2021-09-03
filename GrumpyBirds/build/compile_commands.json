@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/build",
+  "command": "/usr/bin/c++ -I/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds -g -o CMakeFiles/GrumpyBirds.dir/CResourceManager.cpp.o -c /home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CResourceManager.cpp",
+  "file": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CResourceManager.cpp"
+},
+{
+  "directory": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/build",
+  "command": "/usr/bin/c++ -I/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds -g -o CMakeFiles/GrumpyBirds.dir/Source.cpp.o -c /home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/Source.cpp",
+  "file": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/Source.cpp"
+}
+]

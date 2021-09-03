@@ -1,8 +1,10 @@
 #include "SFML/Graphics.hpp"
+#include "SFML/System.hpp"
+#include "SFML/Window.hpp"
 #include "box2d/box2d.h"
-
 #include <iostream>
 
+#include "CResourceManager.h"
 #include "CBody.h"
 
 #define SCALE (double)30.0
