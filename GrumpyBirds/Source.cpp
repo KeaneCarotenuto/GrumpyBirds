@@ -10,6 +10,7 @@
 #define SCALE (double)30.0
 
 int FixedUpdate();
+void InitGameScene();
 void Draw();
 
 //FixedUpdate() call rate
@@ -22,28 +23,25 @@ sf::RenderWindow* window;
 
 int main()
 {
+	//window setup
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
-    //window
     window =  new sf::RenderWindow(sf::VideoMode(800, 800), "SFML and box2D works!", sf::Style::Default, settings);
     window->setFramerateLimit(60);
     CBody::SetWindow(window);
 
-    //Manages the FixedUpdate() timing
-    double stepTime = 0;
-    bool drawn = false;
+	CResourceManager::LoadImage("Rect.png");
+	CResourceManager::LoadImage("Circle.png");
 
-    sf::Clock clock;
+	//Start Game Scene up
+	InitGameScene();
 
-    //create world
-    b2Vec2 gravity(0.0, -9.81f);
-	world = new b2World(gravity);
+	//Manages the FixedUpdate() timing
+	double stepTime = 0;
+	bool drawn = false;
 
-    CBody* myBod = new CBody(world, { 200,700 }, { 50,50 }, b2_dynamicBody);
-    CBody* myBod2 = new CBody(world, { 226,800 }, { 50,50 }, b2_dynamicBody);
-    CBody* myBod3 = new CBody(world, { 226,800 }, 25, b2_dynamicBody);
-    CBody* myGround = new CBody(world, { 400,100 }, { 750,100 }, b2_staticBody);
+	sf::Clock clock;
 
 	while (window->isOpen() == true)
 	{
@@ -58,6 +56,8 @@ int main()
 			stepTime -= timeStep;
 			drawn = false;
 		}
+
+		CBody::TryDestroys();
 
 		//Draws After Updates
 		if (drawn)
@@ -84,7 +84,9 @@ int main()
 
 			if (newEvent.type == sf::Event::KeyPressed)
 			{
-
+				if (newEvent.key.code == sf::Keyboard::Num1) {
+					if (!CBody::GetAllBodies().empty()) CBody::GetAllBodies()[0]->Destroy();
+				}
 			}
 		}
 	}
@@ -92,6 +94,19 @@ int main()
 	return 0;
 
     return 0;
+}
+
+void InitGameScene()
+{
+	//create world
+	b2Vec2 gravity(0.0, -9.81f);
+	world = new b2World(gravity);
+
+	CBody* circleBody = new CBody(world, { 226,800 }, 25, b2_dynamicBody, "Circle.png");
+	CBody* squareBody = new CBody(world, { 200,700 }, { 50,50 }, b2_dynamicBody, "Rect.png");
+	CBody* rectBody = new CBody(world, { 226,800 }, { 100,50 }, b2_dynamicBody, "Rect.png");
+	
+	CBody* myGround = new CBody(world, { 400,100 }, { 750,100 }, b2_staticBody, "Rect.png");
 }
 
 int FixedUpdate() {

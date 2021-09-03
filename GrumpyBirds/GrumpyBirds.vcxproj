@@ -150,10 +150,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBody.cpp" />
+    <ClCompile Include="CResourceManager.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBody.h" />
+    <ClInclude Include="CResourceManager.h" />
     <ClInclude Include="Source.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

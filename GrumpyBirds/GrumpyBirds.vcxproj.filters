@@ -18,11 +18,17 @@
     <ClCompile Include="CBody.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source.h" />
+    <ClInclude Include="CResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
