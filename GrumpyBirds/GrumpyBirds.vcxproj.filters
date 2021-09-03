@@ -23,5 +23,6 @@
     <ClInclude Include="CBody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source.h" />
   </ItemGroup>
 </Project>

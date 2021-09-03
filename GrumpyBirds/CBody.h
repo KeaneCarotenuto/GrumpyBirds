@@ -22,7 +22,7 @@ private:
 	//BOX2D
 	b2BodyDef* m_bodyDef;
 	b2Body* m_body;
-	b2PolygonShape* m_shape;
+	b2Shape* m_shape;
 	b2FixtureDef* m_fixture;
 
 public:
@@ -33,6 +33,7 @@ public:
 
 	//Rect Constructor
 	CBody(b2World* _world, sf::Vector2f _position, sf::Vector2f _size, b2BodyType _type);
+	CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type);
 	~CBody();
 
 	void Draw() { 
