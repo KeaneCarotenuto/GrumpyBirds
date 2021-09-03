@@ -11,6 +11,7 @@
 
 int FixedUpdate();
 void InitGameScene();
+void InitGameScene2();
 void Draw();
 
 //FixedUpdate() call rate
@@ -35,7 +36,7 @@ int main()
 	CResourceManager::LoadImage("Circle.png");
 
 	//Start Game Scene up
-	InitGameScene();
+	//InitGameScene();
 
 	//Manages the FixedUpdate() timing
 	double stepTime = 0;
@@ -85,7 +86,10 @@ int main()
 			if (newEvent.type == sf::Event::KeyPressed)
 			{
 				if (newEvent.key.code == sf::Keyboard::Num1) {
-					if (!CBody::GetAllBodies().empty()) CBody::GetAllBodies()[0]->Destroy();
+					InitGameScene();
+				}
+				if (newEvent.key.code == sf::Keyboard::Num2) {
+					InitGameScene2();
 				}
 			}
 		}
@@ -98,6 +102,10 @@ int main()
 
 void InitGameScene()
 {
+	for (CBody* _body : CBody::GetAllBodies()) {
+		_body->Destroy();
+	}
+
 	//create world
 	b2Vec2 gravity(0.0, -9.81f);
 	world = new b2World(gravity);
@@ -109,9 +117,26 @@ void InitGameScene()
 	CBody* myGround = new CBody(world, { 400,100 }, { 750,100 }, b2_staticBody, "Rect.png");
 }
 
+void InitGameScene2()
+{
+	for (CBody* _body : CBody::GetAllBodies()) {
+		_body->Destroy();
+	}
+
+	//create world
+	b2Vec2 gravity(0.0, -9.81f);
+	world = new b2World(gravity);
+
+	CBody* circleBody = new CBody(world, { 426,800 }, 25, b2_dynamicBody, "Circle.png");
+	CBody* squareBody = new CBody(world, { 200,300 }, { 50,50 }, b2_dynamicBody, "Rect.png");
+
+	CBody* myGround = new CBody(world, { 400,100 }, { 750,100 }, b2_staticBody, "Rect.png");
+	myGround->GETBODY_TODELETE()->SetTransform(myGround->GETBODY_TODELETE()->GetPosition(), 10 * (M_PI / 180.0));
+}
+
 int FixedUpdate() {
     //step b2D system
-    world->Step(timeStep, velocityIterations, positionIterations);
+    if (world) world->Step(timeStep, velocityIterations, positionIterations);
 
 	return 1;
 }

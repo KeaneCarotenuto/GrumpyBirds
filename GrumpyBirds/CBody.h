@@ -39,6 +39,8 @@ public:
 	static void SetWindow(sf::RenderWindow* _wind) { m_window = _wind; };
 	static sf::RenderWindow* GetWindow() { return m_window; };
 
+	b2Body* GETBODY_TODELETE() { return  m_body; };
+
 	//Rect Constructor
 	CBody(b2World* _world, sf::Vector2f _position, sf::Vector2f _size, b2BodyType _type, std::string _imgName);
 	CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName);
