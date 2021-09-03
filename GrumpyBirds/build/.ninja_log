@@ -1,0 +1,8 @@
+# ninja log v5
+1	806	1630648676364115863	CMakeFiles/MyExecutable.dir/Source.cpp.o	462b70a7d3147e5a
+1	715	1630648676274116345	CMakeFiles/MyExecutable.dir/CResourceManager.cpp.o	e42d83b4a0450224
+1	913	1630648582437932375	CMakeFiles/GrumpyBirds.dir/Source.cpp.o	6e639e0d7f662e59
+913	1054	1630648582577931685	GrumpyBirds	34695a3340bce65
+0	661	1630648752897028307	CMakeFiles/GrumpyBirds.dir/CResourceManager.cpp.o	1ff654186769dd9c
+1	670	1630648837203207404	CMakeFiles/GrumpyBirds.dir/CResourceManager.cpp.o	1ff654186769dd9c
+670	785	1630648837316540065	GrumpyBirds	3c88b3055cba2557

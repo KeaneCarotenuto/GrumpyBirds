@@ -1,5 +1,8 @@
 #include "SFML/Graphics.hpp"
+#include "SFML/System.hpp"
+#include "SFML/Window.hpp"
 #include "box2d/box2d.h"
+#include "CResourceManager.h"
 
 #include <iostream>
 
@@ -27,7 +30,7 @@ int main()
     b2BodyDef BodyDef;
     BodyDef.position = b2Vec2(100 / SCALE, 100 / SCALE);
     BodyDef.type = b2_dynamicBody;
-    b2Body* boxBody = world.CreateBody(&BodyDef);
+    b2Body *boxBody = world.CreateBody(&BodyDef);
 
     b2PolygonShape Shape;
     Shape.SetAsBox((100.f / 2) / SCALE, (100.f / 2) / SCALE);
@@ -40,7 +43,7 @@ int main()
     b2BodyDef gBodyDef;
     gBodyDef.position = b2Vec2(0 / SCALE, 600 / SCALE);
     gBodyDef.type = b2_staticBody;
-    b2Body* gBody = world.CreateBody(&gBodyDef);
+    b2Body *gBody = world.CreateBody(&gBodyDef);
 
     b2PolygonShape gShape;
     gShape.SetAsBox((800 / 2) / SCALE, (100 / 2) / SCALE);
@@ -48,7 +51,6 @@ int main()
     gFixtureDef.density = 0.f;
     gFixtureDef.shape = &gShape;
     gBody->CreateFixture(&gFixtureDef);
-
 
     while (window.isOpen())
     {
@@ -62,8 +64,7 @@ int main()
                 window.close();
         }
 
-
-        for (b2Body* BodyIterator = world.GetBodyList(); BodyIterator != 0; BodyIterator = BodyIterator->GetNext())
+        for (b2Body *BodyIterator = world.GetBodyList(); BodyIterator != 0; BodyIterator = BodyIterator->GetNext())
         {
             if (BodyIterator->GetType() == b2_dynamicBody)
             {
@@ -80,7 +81,6 @@ int main()
                 Gshape.setRotation(BodyIterator->GetAngle() * 180 / b2_pi);
 
                 window.draw(Gshape);
-
             }
         }
 
