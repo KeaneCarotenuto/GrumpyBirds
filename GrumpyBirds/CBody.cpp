@@ -11,6 +11,11 @@ void CBody::TryDestroys()
 
     for (CBody* _body : m_toDelete) {
         if (!_body->m_world->IsLocked()) {
+            std::vector<CBody*>::iterator it = std::find(m_allBodies.begin(), m_allBodies.end(), _body);
+            if (it != m_allBodies.end()) {
+                m_allBodies.erase(it);
+            }
+
             delete _body;
         }
         else {
@@ -79,6 +84,17 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType 
     m_body->CreateFixture(m_fixture);
 
     m_allBodies.push_back(this);
+}
+
+void CBody::Destroy()
+{
+    std::vector<CBody*>::iterator it = std::find(m_toDelete.begin(), m_toDelete.end(), this);
+    if (it == m_toDelete.end()) {
+        m_toDelete.push_back(this);
+    }
+    else {
+        //Already in list
+    }
 }
 
 void CBody::Draw()

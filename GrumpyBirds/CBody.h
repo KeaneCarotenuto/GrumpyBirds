@@ -12,6 +12,24 @@
 
 class CBody
 {
+public:
+	static std::vector<CBody*> GetAllBodies() { return m_allBodies; };
+	static std::vector<CBody*> GetToDelete() { return m_toDelete; };
+	static void TryDestroys();
+
+	static void SetWindow(sf::RenderWindow* _wind) { m_window = _wind; };
+	static sf::RenderWindow* GetWindow() { return m_window; };
+
+	b2Body* GETBODY_TODELETE() { return  m_body; };
+
+	//Rect Constructor
+	CBody(b2World* _world, sf::Vector2f _position, sf::Vector2f _size, b2BodyType _type, std::string _imgName);
+	CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName);
+
+	void Destroy();
+
+	void Draw();
+
 private:
 	//DO NOT CALL THIS, use .Destroy() INSTEAD!
 	~CBody();
@@ -30,23 +48,5 @@ private:
 	b2Body* m_body;
 	b2Shape* m_shape;
 	b2FixtureDef* m_fixture;
-
-public:
-	static std::vector<CBody*> GetAllBodies() { return m_allBodies; };
-	static std::vector<CBody*> GetToDelete() { return m_toDelete; };
-	static void TryDestroys();
-
-	static void SetWindow(sf::RenderWindow* _wind) { m_window = _wind; };
-	static sf::RenderWindow* GetWindow() { return m_window; };
-
-	b2Body* GETBODY_TODELETE() { return  m_body; };
-
-	//Rect Constructor
-	CBody(b2World* _world, sf::Vector2f _position, sf::Vector2f _size, b2BodyType _type, std::string _imgName);
-	CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName);
-
-	void Destroy() { m_toDelete.push_back(this); };
-
-	void Draw();
 };
 

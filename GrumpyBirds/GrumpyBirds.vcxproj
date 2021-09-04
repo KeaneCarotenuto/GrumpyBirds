@@ -150,11 +150,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBody.cpp" />
+    <ClCompile Include="CGame.cpp" />
     <ClCompile Include="CResourceManager.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBody.h" />
+    <ClInclude Include="CGame.h" />
     <ClInclude Include="CResourceManager.h" />
     <ClInclude Include="Source.h" />
   </ItemGroup>

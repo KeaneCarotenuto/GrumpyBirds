@@ -6,9 +6,11 @@
   <ItemGroup>
     <Filter Include="Header Files">
       <UniqueIdentifier>{b14717c3-3788-4cd2-8215-4b79094446ec}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{bc5d2adf-4475-4168-a0d1-f3ed4f910c21}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -21,13 +23,21 @@
     <ClCompile Include="CResourceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source.h" />
     <ClInclude Include="CResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

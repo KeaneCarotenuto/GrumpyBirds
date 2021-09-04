@@ -6,6 +6,7 @@
 
 #include "CResourceManager.h"
 #include "CBody.h"
+#include "CGame.h"
 
 #define SCALE (double)30.0
 
@@ -19,8 +20,9 @@ double timeStep = (1.0f / 60.0f);
 int32 velocityIterations = 6;
 int32 positionIterations = 2;
 
-b2World* world;
 sf::RenderWindow* window;
+
+CGame* game = CGame::GetInstance();
 
 int main()
 {
@@ -31,6 +33,7 @@ int main()
     window =  new sf::RenderWindow(sf::VideoMode(800, 800), "SFML and box2D works!", sf::Style::Default, settings);
     window->setFramerateLimit(60);
     CBody::SetWindow(window);
+	game->SetWindow(window);
 
 	CResourceManager::LoadImage("Rect.png");
 	CResourceManager::LoadImage("Circle.png");
@@ -86,10 +89,10 @@ int main()
 			if (newEvent.type == sf::Event::KeyPressed)
 			{
 				if (newEvent.key.code == sf::Keyboard::Num1) {
-					InitGameScene();
+					game->SetLevel(CGame::Level::One);
 				}
 				if (newEvent.key.code == sf::Keyboard::Num2) {
-					InitGameScene2();
+					game->SetLevel(CGame::Level::Two);
 				}
 			}
 		}
@@ -100,43 +103,8 @@ int main()
     return 0;
 }
 
-void InitGameScene()
-{
-	for (CBody* _body : CBody::GetAllBodies()) {
-		_body->Destroy();
-	}
-
-	//create world
-	b2Vec2 gravity(0.0, -9.81f);
-	world = new b2World(gravity);
-
-	CBody* circleBody = new CBody(world, { 226,800 }, 25, b2_dynamicBody, "Circle.png");
-	CBody* squareBody = new CBody(world, { 200,700 }, { 50,50 }, b2_dynamicBody, "Rect.png");
-	CBody* rectBody = new CBody(world, { 226,800 }, { 100,50 }, b2_dynamicBody, "Rect.png");
-	
-	CBody* myGround = new CBody(world, { 400,100 }, { 750,100 }, b2_staticBody, "Rect.png");
-}
-
-void InitGameScene2()
-{
-	for (CBody* _body : CBody::GetAllBodies()) {
-		_body->Destroy();
-	}
-
-	//create world
-	b2Vec2 gravity(0.0, -9.81f);
-	world = new b2World(gravity);
-
-	CBody* circleBody = new CBody(world, { 426,800 }, 25, b2_dynamicBody, "Circle.png");
-	CBody* squareBody = new CBody(world, { 200,300 }, { 50,50 }, b2_dynamicBody, "Rect.png");
-
-	CBody* myGround = new CBody(world, { 400,100 }, { 750,100 }, b2_staticBody, "Rect.png");
-	myGround->GETBODY_TODELETE()->SetTransform(myGround->GETBODY_TODELETE()->GetPosition(), 10 * (M_PI / 180.0));
-}
-
 int FixedUpdate() {
-    //step b2D system
-    if (world) world->Step(timeStep, velocityIterations, positionIterations);
+	game->FixedUpdate();
 
 	return 1;
 }
