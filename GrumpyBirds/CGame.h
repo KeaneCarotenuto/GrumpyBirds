@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "CBody.h"
+#include "utility.h"
 
 class CGame
 {
@@ -21,6 +22,8 @@ public:
 	void Init();
 	void Clear();
 	void FixedUpdate();
+
+	b2World* GetWorld() { return m_world; };
 
 private:
 	CGame();

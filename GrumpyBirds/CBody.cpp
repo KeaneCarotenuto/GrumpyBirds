@@ -42,7 +42,7 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, sf::Vector2f _size, b2Body
     
 
     m_bodyDef =  new b2BodyDef();
-    m_bodyDef->position = b2Vec2(_position.x / SCALE, _position.y / SCALE);
+    m_bodyDef->position = util::V(_position);
     m_bodyDef->type = _type;
     m_body = m_world->CreateBody(m_bodyDef);
 
@@ -72,7 +72,7 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType 
 
 
     m_bodyDef = new b2BodyDef();
-    m_bodyDef->position = b2Vec2(_position.x / SCALE, _position.y / SCALE);
+    m_bodyDef->position = util::V(_position);
     m_bodyDef->type = _type;
     m_body = _world->CreateBody(m_bodyDef);
 
@@ -100,10 +100,8 @@ void CBody::Destroy()
 void CBody::Draw()
 {
     //update visual
-    b2Vec2 position = m_body->GetPosition();
-    float angle = m_body->GetAngle();
-    m_sprite->setPosition(position.x * SCALE, m_window->getSize().y - position.y * SCALE);
-    m_sprite->setRotation(-angle / (M_PI / 180.0));
+    m_sprite->setPosition(util::WorldToScreen(m_body->GetPosition()));
+    m_sprite->setRotation(-util::Degrees(m_body->GetAngle()));
 
     m_window->draw(*m_sprite);
 }
@@ -115,7 +113,7 @@ CBody::~CBody()
         m_allBodies.erase(it);
     }
     else {
-        std::cerr << "\nWARNING: <CBody::~CBody> [this] does not exist in [m_allBodies]\n";
+        //doesnt exit in m_bodies anymore
     }
 
     //SFML

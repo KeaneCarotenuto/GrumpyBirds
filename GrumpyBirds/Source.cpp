@@ -6,13 +6,13 @@
 
 #include "CResourceManager.h"
 #include "CBody.h"
+#include "CBird.h"
 #include "CGame.h"
+#include "utility.h"
 
-#define SCALE (double)30.0
+
 
 int FixedUpdate();
-void InitGameScene();
-void InitGameScene2();
 void Draw();
 
 //FixedUpdate() call rate
@@ -24,6 +24,8 @@ sf::RenderWindow* window;
 
 CGame* game = CGame::GetInstance();
 
+sf::RenderWindow* util::window = nullptr;
+
 int main()
 {
 	//window setup
@@ -34,6 +36,7 @@ int main()
     window->setFramerateLimit(60);
     CBody::SetWindow(window);
 	game->SetWindow(window);
+	util::window = window;
 
 	CResourceManager::LoadImage("Rect.png");
 	CResourceManager::LoadImage("Circle.png");
@@ -46,6 +49,8 @@ int main()
 	bool drawn = false;
 
 	sf::Clock clock;
+
+	CBird* myBird = nullptr;
 
 	while (window->isOpen() == true)
 	{
@@ -93,6 +98,12 @@ int main()
 				}
 				if (newEvent.key.code == sf::Keyboard::Num2) {
 					game->SetLevel(CGame::Level::Two);
+				}
+				if (newEvent.key.code == sf::Keyboard::Num3) {
+					if (game->GetWorld()) myBird = new CBird(game->GetWorld(), { 226,800 }, 25, b2_dynamicBody, "Circle.png");
+				}
+				if (newEvent.key.code == sf::Keyboard::Num4) {
+					if (myBird) myBird->Destroy();
 				}
 			}
 		}

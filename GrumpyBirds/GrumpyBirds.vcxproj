@@ -149,16 +149,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CBird.cpp" />
     <ClCompile Include="CBody.cpp" />
     <ClCompile Include="CGame.cpp" />
     <ClCompile Include="CResourceManager.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CBird.h" />
     <ClInclude Include="CBody.h" />
     <ClInclude Include="CGame.h" />
     <ClInclude Include="CResourceManager.h" />
     <ClInclude Include="Source.h" />
+    <ClInclude Include="utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
