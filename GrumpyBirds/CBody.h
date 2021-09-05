@@ -12,8 +12,12 @@
 #include "utility.h"
 #include "CCollision.h"
 
+//forward
+class CBody;
+
 struct CollisionData
 {
+	CBody* other;
 	std::string ObjName;
 	b2Vec2 Velocity;
 	float ObjMass;

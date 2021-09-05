@@ -81,6 +81,8 @@ void CBird::FixedUpdate()
 
 void CBird::OnCollisionEnter(CollisionData _data)
 {
+	if (_data.other->GetBody()->GetFixtureList()->IsSensor()) return;
+
 	std::cout << "Bird Col\n";
 }
 
@@ -116,12 +118,21 @@ void CBird::DoShooting()
 	}
 
 	if (m_mouseHolding) {
-		m_body->SetTransform(util::ScreenToWorld(mousePos), m_body->GetAngle());
+		sf::Vector2f newPos = util::V(util::ScreenToWorld(mousePos));
+		sf::Vector2f shootVector = (m_shootPos - newPos);
+
+		if (util::Mag(shootVector) >= m_pullBackDist) {
+			shootVector = util::Normalize(shootVector) * m_pullBackDist;
+		}
+		m_body->SetTransform(util::V(m_shootPos - shootVector), m_body->GetAngle());
 	}
 	else {
 		if (releasedThisFrame) {
 			SetState(BirdState::Moving);
-			m_body->SetLinearVelocity(m_shootSpeed * (util::V(m_shootPos) - m_body->GetPosition()));
+			b2Vec2 newVel = m_shootMulti * (util::V(m_shootPos) - m_body->GetPosition());
+
+			m_body->SetLinearVelocity(newVel);
+			std::cout << "Vel: " << m_body->GetLinearVelocity().Length() << "\n";
 		}
 		else {
 			m_body->SetTransform(util::V(m_shootPos), m_body->GetAngle());

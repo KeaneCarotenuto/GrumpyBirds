@@ -42,7 +42,9 @@ private:
 	BirdState m_state = BirdState::Waiting;
 
 	sf::Vector2f m_shootPos = {0,0};
-	float m_shootSpeed = 60.0f;
+	float m_pullBackDist = 100.0f;
+	float m_shootMulti = 10.0f;
+	float m_maxShootSpeed = 10.0f;
 
 	bool m_mouseHolding = false;
 	bool m_mouseDown = false;

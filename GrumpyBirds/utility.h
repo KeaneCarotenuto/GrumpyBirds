@@ -30,4 +30,13 @@ namespace util {
 	static float Radians(float _deg) {
 		return _deg / (180.0 / M_PI);
 	}
+
+
+	static float Mag(sf::Vector2f _a) {
+		return abs(sqrt(_a.x * _a.x + _a.y * _a.y));
+	}
+
+	static sf::Vector2f Normalize(sf::Vector2f _a) {
+		return (_a / Mag(_a));
+	}
 }

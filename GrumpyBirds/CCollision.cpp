@@ -26,6 +26,9 @@ void CCollision::BeginContact(b2Contact* _contact)
         aData.ObjName = CBodyA->GetName();
         bData.ObjName = CBodyB->GetName();
 
+        aData.other = CBodyA;
+        bData.other = CBodyB;
+
         aData.CollisionNormal = (bodyA->GetPosition() - bodyB->GetPosition());
         aData.CollisionNormal.Normalize();
         bData.CollisionNormal = (bodyB->GetPosition() - bodyA->GetPosition());
