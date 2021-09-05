@@ -26,6 +26,11 @@ CGame* game = CGame::GetInstance();
 
 sf::RenderWindow* util::window = nullptr;
 
+/// <summary>
+/// Setup and then running of the main loop.
+/// <para>Author: Keane</para>
+/// </summary>
+/// <returns></returns>
 int main()
 {
 	//window setup
