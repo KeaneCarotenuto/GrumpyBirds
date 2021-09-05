@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "CBody.h"
+#include "CBird.h"
 #include "utility.h"
 
 class CGame
@@ -35,7 +36,7 @@ private:
 
 	CGame::Level m_currentLevel = Level::One;
 
-	std::vector<CBody*> m_allBirds;
+	std::vector<CBird*> m_allBirds;
 	std::vector<CBody*> m_allBlocks;
 	std::vector<CBody*> m_allGround;
 

@@ -1,4 +1,5 @@
 #include "CBody.h"
+#include "CBird.h"
 
 sf::RenderWindow* CBody::m_window;
 std::vector<CBody*> CBody::m_allBodies;
@@ -88,6 +89,8 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType 
 
 void CBody::Destroy()
 {
+    std::cout << "-Destroy body\n";
+
     std::vector<CBody*>::iterator it = std::find(m_toDelete.begin(), m_toDelete.end(), this);
     if (it == m_toDelete.end()) {
         m_toDelete.push_back(this);
@@ -106,8 +109,14 @@ void CBody::Draw()
     m_window->draw(*m_sprite);
 }
 
+void CBody::FixedUpdate()
+{
+}
+
 CBody::~CBody()
 {
+    std::cout << "-Delete Body\n";
+
     std::vector<CBody*>::iterator it = std::find(m_allBodies.begin(), m_allBodies.end(), this);
     if (it != m_allBodies.end()) {
         m_allBodies.erase(it);

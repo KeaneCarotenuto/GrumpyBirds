@@ -29,12 +29,9 @@ public:
 
 	void Draw();
 
+	virtual void FixedUpdate();
+
 private:
-
-	static sf::RenderWindow* m_window;
-	static std::vector<CBody*> m_allBodies;
-	static std::vector<CBody*> m_toDelete;
-
 	//SFML
 	sf::Texture* m_texture;
 	sf::Sprite* m_sprite;
@@ -48,6 +45,10 @@ private:
 
 protected:
 	//DO NOT CALL THIS, use .Destroy() INSTEAD!
-	~CBody();
+	virtual ~CBody();
+
+	static sf::RenderWindow* m_window;
+	static std::vector<CBody*> m_allBodies;
+	static std::vector<CBody*> m_toDelete;
 };
 

@@ -2,6 +2,9 @@
 #include "CBody.h"
 #include "utility.h"
 
+//forward declare
+class CBird;
+
 class CBird : public CBody
 {
 public:
@@ -24,12 +27,19 @@ public:
 
 	void Destroy();
 
+	void FixedUpdate();
+
 private:
-	~CBird();
+	void DoWaiting();
+	void DoMoving();
+	void DoShooting();
 
 	BirdType m_type = BirdType::Regular;
-	BirdState m_state = BirdState::Moving;
+	BirdState m_state = BirdState::Waiting;
 
-	b2Vec2 m_shootPos;
+	sf::Vector2f m_shootPos = {100,100};
+
+protected:
+	~CBird();
 };
 
