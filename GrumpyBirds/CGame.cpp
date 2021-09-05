@@ -34,6 +34,8 @@ void CGame::Init()
 	if (m_isInitialised) return;
 	m_isInitialised = true;
 
+	m_gameClock.restart();
+
 	switch (m_currentLevel)
 	{
 	case Level::One: {
@@ -42,7 +44,6 @@ void CGame::Init()
 
 		CBird* bird1 = new CBird(m_world, { 100,35 }, 25, b2_dynamicBody, "Circle.png");				m_allBirds.push_back(bird1);
 		bird1->SetShootPos(shootPos);
-		bird1->SetState(CBird::BirdState::Shooting);
 
 		CBird* bird2 = new CBird(m_world, { 50,35 }, 25, b2_dynamicBody, "Circle.png");				m_allBirds.push_back(bird2);
 		bird2->SetShootPos(shootPos);
@@ -51,6 +52,8 @@ void CGame::Init()
 		CBody* rectBody = new CBody(m_world, { 800,800 }, { 100,50 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(rectBody);
 
 		CBody* myGround = new CBody(m_world, { 800,5 }, { 1600,10 }, b2_staticBody, "Rect.png");		m_allGround.push_back(myGround);
+
+		FindNewShooter();
 
 		break;
 	}
@@ -67,6 +70,19 @@ void CGame::Init()
 
 	default:
 		break;
+	}
+}
+
+void CGame::FindNewShooter()
+{
+	m_currentShooter = nullptr;
+
+	for (CBird* _bird : m_allBirds) {
+		if (_bird->GetState() == CBird::BirdState::Waiting) {
+			m_currentShooter = _bird;
+			_bird->SetState(CBird::BirdState::Shooting);
+			break;
+		}
 	}
 }
 
@@ -87,6 +103,22 @@ void CGame::FixedUpdate()
 
 	for (CBody* _body : CBody::GetAllBodies()) {
 		_body->FixedUpdate();
+	}
+
+	if (m_currentShooter == nullptr) {
+		
+		if (m_timeout == 0) {
+			m_timeout = m_gameClock.getElapsedTime().asSeconds();
+		}
+		else {
+			if (m_gameClock.getElapsedTime().asSeconds() - m_timeout >= m_maxTimeout) {
+				Clear();
+			}
+		}
+
+	}
+	else {
+		if (m_currentShooter->GetState() != CBird::BirdState::Shooting) FindNewShooter();
 	}
 
 	if (m_world) m_world->Step(timeStep, velocityIterations, positionIterations);

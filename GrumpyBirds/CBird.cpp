@@ -19,15 +19,23 @@ void CBird::SetState(BirdState _state)
 	{
 	case CBird::BirdState::Waiting:
 		m_body->SetType(b2BodyType::b2_staticBody);
+		m_body->GetFixtureList()->SetSensor(true);
 		break;
 
 	case CBird::BirdState::Shooting:
 		m_body->SetType(b2BodyType::b2_kinematicBody);
+		m_body->GetFixtureList()->SetSensor(true);
 		break;
 
 	case CBird::BirdState::Moving:
 		m_body->SetType(b2BodyType::b2_dynamicBody);
+		m_body->GetFixtureList()->SetSensor(false);
 		break;
+
+	/*case CBird::BirdState::OffScreen:
+		m_body->SetType(b2BodyType::b2_staticBody);
+		m_body->GetFixtureList()->SetSensor(true);
+		break;*/
 
 	default:
 		break;
@@ -43,6 +51,14 @@ void CBird::Destroy()
 
 void CBird::FixedUpdate()
 {
+	sf::Vector2f screenPos = util::WorldToScreen(m_body->GetPosition());
+
+	/*if (m_state != BirdState::OffScreen &&
+		(screenPos.x < 0 || screenPos.x > m_window->getSize().x ||
+		screenPos.y < 0 || screenPos.y > m_window->getSize().y)) {
+		SetState(BirdState::OffScreen);
+		m_body->SetTransform();
+	}*/
 
 	switch (m_state)
 	{

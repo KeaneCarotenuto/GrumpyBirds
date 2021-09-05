@@ -24,6 +24,7 @@ public:
 	void SetLevel(Level _newLevel);
 
 	void Init();
+	void FindNewShooter();
 	void Clear();
 	void FixedUpdate();
 
@@ -42,6 +43,12 @@ private:
 	std::vector<CBird*> m_allBirds;
 	std::vector<CBody*> m_allBlocks;
 	std::vector<CBody*> m_allGround;
+
+	CBird* m_currentShooter = nullptr;
+
+	sf::Clock m_gameClock;
+	float m_timeout = 0;
+	float m_maxTimeout = 3;
 
 	CCollision m_collisionDetector;
 

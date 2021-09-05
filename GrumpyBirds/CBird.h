@@ -17,12 +17,15 @@ public:
 	enum class BirdState {
 		Waiting,
 		Shooting,
-		Moving
+		Moving,
+		//OffScreen
 	};
 
 	CBird(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName);
 
 	void SetState(BirdState _state);
+	BirdState GetState() { return m_state; };
+
 	void SetShootPos(sf::Vector2f _pos) { m_shootPos = _pos; };
 
 	void Destroy();
