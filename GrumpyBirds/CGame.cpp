@@ -145,6 +145,14 @@ void CGame::FindNewShooter()
 	}
 }
 
+void CGame::ClearDeleted()
+{
+	m_allBirds.erase(std::remove_if(m_allBirds.begin(), m_allBirds.end(), [](CBird* _body) { return _body->IsDeleting(); }), m_allBirds.end());
+	m_allPigs.erase(std::remove_if(m_allPigs.begin(), m_allPigs.end(), [](CPig* _body) { return _body->IsDeleting(); }), m_allPigs.end());
+	m_allBlocks.erase(std::remove_if(m_allBlocks.begin(), m_allBlocks.end(), [](CDestructibleBlock* _body) { return _body->IsDeleting(); }), m_allBlocks.end());
+	m_allGround.erase(std::remove_if(m_allGround.begin(), m_allGround.end(), [](CBody* _body) { return _body->IsDeleting(); }), m_allGround.end());
+}
+
 /// <summary>
 /// Clears level
 /// <para>Author: Keane</para>
@@ -153,10 +161,10 @@ void CGame::Clear()
 {
 	if (!m_isInitialised) return;
 
-	for (CBird* _body : m_allBirds) { _body->Destroy(); };		m_allBirds.clear();
-	for (CPig* _body : m_allPigs) { _body->Destroy(); };		m_allPigs.clear();
-	for (CBody* _body : m_allBlocks) { _body->Destroy(); };		m_allBlocks.clear();
-	for (CBody* _body : m_allGround) { _body->Destroy(); };		m_allGround.clear();
+	for (CBird* _body : m_allBirds) { if (_body) _body->Destroy(); };		m_allBirds.clear();
+	for (CPig* _body : m_allPigs) { if (_body) _body->Destroy(); };		m_allPigs.clear();
+	for (CDestructibleBlock* _body : m_allBlocks) { if (_body) _body->Destroy(); };		m_allBlocks.clear();
+	for (CBody* _body : m_allGround) { if (_body) _body->Destroy(); };		m_allGround.clear();
 
 	m_isInitialised = false;
 }

@@ -31,6 +31,7 @@ public:
 
 	void Init();
 	void FindNewShooter();
+	void ClearDeleted();
 	void Clear();
 	void FixedUpdate();
 

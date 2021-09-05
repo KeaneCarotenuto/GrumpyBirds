@@ -70,6 +70,7 @@ int main()
 			drawn = false;
 		}
 
+		if (!CBody::GetToDelete().empty()) CGame::GetInstance()->ClearDeleted();
 		CBody::TryDestroys();
 
 		//Draws After Updates

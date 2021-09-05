@@ -128,6 +128,8 @@ void CBody::Destroy()
 {
     std::cout << "-Destroy body\n";
 
+    m_markedForDelete = true;
+
     std::vector<CBody*>::iterator it = std::find(m_toDelete.begin(), m_toDelete.end(), this);
     if (it == m_toDelete.end()) {
         m_toDelete.push_back(this);

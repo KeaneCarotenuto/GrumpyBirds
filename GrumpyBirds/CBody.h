@@ -49,6 +49,7 @@ public:
 	CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName);
 
 	void Destroy();
+	bool IsDeleting() { return m_markedForDelete; };
 
 	void Draw();
 
@@ -80,6 +81,8 @@ protected:
 	b2Body* m_body;
 	b2Shape* m_shape;
 	b2FixtureDef* m_fixture;
+
+	bool m_markedForDelete = false;
 };
 
 #endif
