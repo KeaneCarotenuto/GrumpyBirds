@@ -48,8 +48,43 @@ void CGame::Init()
 		CBird* bird2 = new CBird(m_world, { 50,35 }, 25, b2_dynamicBody, "Bird_Regular_1.png");				m_allBirds.push_back(bird2);
 		bird2->SetShootPos(shootPos);
 
-		CBody* squareBody = new CBody(m_world, { 800,700 }, { 50,50 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(squareBody);
-		CBody* rectBody = new CBody(m_world, { 800,800 }, { 100,50 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(rectBody);
+		CBody* anchor = new CBody(m_world, { 800,400 }, { 10,10 }, b2_staticBody, "Rect.png");		m_allBlocks.push_back(anchor);
+		CBody* rectBody = new CBody(m_world, { 800,800 }, { 100,20 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(rectBody);
+		CBody* rectBody2 = new CBody(m_world, { 800,800 }, { 100,20 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(rectBody2);
+		CBody* rectBody3 = new CBody(m_world, { 800,800 }, { 100,20 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(rectBody3);
+		CBody* circleBody = new CBody(m_world, { 800,700 }, 40, b2_dynamicBody, "Circle.png");		m_allBlocks.push_back(circleBody);
+
+		b2RevoluteJointDef revoluteJointDef1;
+		revoluteJointDef1.bodyA = anchor->GetBody();
+		revoluteJointDef1.bodyB = rectBody->GetBody();
+		revoluteJointDef1.collideConnected = false;
+		revoluteJointDef1.localAnchorA.Set(0, 0);
+		revoluteJointDef1.localAnchorB.Set(50 / SCALE, 0 / SCALE);
+		m_world->CreateJoint(&revoluteJointDef1);
+
+		b2RevoluteJointDef revoluteJointDef2;
+		revoluteJointDef2.bodyA = rectBody->GetBody();
+		revoluteJointDef2.bodyB = rectBody2->GetBody();
+		revoluteJointDef2.collideConnected = false;
+		revoluteJointDef2.localAnchorA.Set(-50 / SCALE, 0 / SCALE);
+		revoluteJointDef2.localAnchorB.Set(50 / SCALE, 0 / SCALE);
+		m_world->CreateJoint(&revoluteJointDef2);
+
+		b2RevoluteJointDef revoluteJointDef3;
+		revoluteJointDef3.bodyA = rectBody2->GetBody();
+		revoluteJointDef3.bodyB = rectBody3->GetBody();
+		revoluteJointDef3.collideConnected = false;
+		revoluteJointDef3.localAnchorA.Set(-50 / SCALE, 0 / SCALE);
+		revoluteJointDef3.localAnchorB.Set(50 / SCALE, 0 / SCALE);
+		m_world->CreateJoint(&revoluteJointDef3);
+
+		b2RevoluteJointDef revoluteJointDef4;
+		revoluteJointDef4.bodyA = rectBody3->GetBody();
+		revoluteJointDef4.bodyB = circleBody->GetBody();
+		revoluteJointDef4.collideConnected = false;
+		revoluteJointDef4.localAnchorA.Set(-50 / SCALE, 0 / SCALE);
+		revoluteJointDef4.localAnchorB.Set(0, 0);
+		m_world->CreateJoint(&revoluteJointDef4);
 
 		CBody* myGround = new CBody(m_world, { 800,5 }, { 1600,10 }, b2_staticBody, "Rect.png");		m_allGround.push_back(myGround);
 
