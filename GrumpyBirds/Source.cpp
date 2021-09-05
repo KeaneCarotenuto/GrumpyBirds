@@ -32,7 +32,7 @@ int main()
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
-    window =  new sf::RenderWindow(sf::VideoMode(800, 800), "SFML and box2D works!", sf::Style::Default, settings);
+    window =  new sf::RenderWindow(sf::VideoMode(1600, 800), "SFML and box2D works!", sf::Style::Default, settings);
     window->setFramerateLimit(60);
     CBody::SetWindow(window);
 	game->SetWindow(window);

@@ -38,11 +38,19 @@ void CGame::Init()
 	{
 	case Level::One: {
 
-		CBird* bird1 = new CBird(m_world, { 226,800 }, 25, b2_dynamicBody, "Circle.png");				m_allBirds.push_back(bird1);
-		CBody* squareBody = new CBody(m_world, { 200,700 }, { 50,50 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(squareBody);
-		CBody* rectBody = new CBody(m_world, { 226,800 }, { 100,50 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(rectBody);
+		sf::Vector2f shootPos = { 200,100 };
 
-		CBody* myGround = new CBody(m_world, { 400,100 }, { 750,100 }, b2_staticBody, "Rect.png");		m_allGround.push_back(myGround);
+		CBird* bird1 = new CBird(m_world, { 100,35 }, 25, b2_dynamicBody, "Circle.png");				m_allBirds.push_back(bird1);
+		bird1->SetShootPos(shootPos);
+		bird1->SetState(CBird::BirdState::Shooting);
+
+		CBird* bird2 = new CBird(m_world, { 50,35 }, 25, b2_dynamicBody, "Circle.png");				m_allBirds.push_back(bird2);
+		bird2->SetShootPos(shootPos);
+
+		CBody* squareBody = new CBody(m_world, { 800,700 }, { 50,50 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(squareBody);
+		CBody* rectBody = new CBody(m_world, { 800,800 }, { 100,50 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(rectBody);
+
+		CBody* myGround = new CBody(m_world, { 800,5 }, { 1600,10 }, b2_staticBody, "Rect.png");		m_allGround.push_back(myGround);
 
 		break;
 	}

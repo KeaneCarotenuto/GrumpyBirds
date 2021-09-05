@@ -22,10 +22,12 @@ public:
 
 	CBird(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName);
 
+	void SetState(BirdState _state);
+	void SetShootPos(sf::Vector2f _pos) { m_shootPos = _pos; };
+
 	void Destroy();
 
 	void FixedUpdate();
-
 	void OnCollisionEnter(CollisionData _data);
 
 private:
@@ -36,7 +38,11 @@ private:
 	BirdType m_type = BirdType::Regular;
 	BirdState m_state = BirdState::Waiting;
 
-	sf::Vector2f m_shootPos = {100,100};
+	sf::Vector2f m_shootPos = {0,0};
+	float m_shootSpeed = 60.0f;
+
+	bool m_mouseHolding = false;
+	bool m_mouseDown = false;
 
 protected:
 	~CBird();
