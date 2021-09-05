@@ -2,6 +2,15 @@
 
 #include"CCollision.h"
 
+/// <summary>
+/// Basic Bird Constructor
+/// <para>Author: Keane</para>
+/// </summary>
+/// <param name="_world"></param>
+/// <param name="_position"></param>
+/// <param name="_radius"></param>
+/// <param name="_type"></param>
+/// <param name="_imgName"></param>
 CBird::CBird(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName) : 
 	CBody(_world, _position, _radius, _type, _imgName)
 {
@@ -12,6 +21,11 @@ CBird::CBird(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType 
 	m_name = "BIRD";
 }
 
+/// <summary>
+/// Set setate of bird to change how it behaves
+/// <para>Author: Keane</para>
+/// </summary>
+/// <param name="_state"></param>
 void CBird::SetState(BirdState _state)
 {
 	m_state = _state;
@@ -43,6 +57,10 @@ void CBird::SetState(BirdState _state)
 	}
 }
 
+/// <summary>
+/// Call this instead of delete, to safely delete
+/// <para>Author: Keane</para>
+/// </summary>
 void CBird::Destroy()
 {
     std::cout << "Destroy bird\n";
@@ -50,6 +68,10 @@ void CBird::Destroy()
 	CBody::Destroy();
 }
 
+/// <summary>
+/// Fixed update for bird
+/// <para>Author: Keane</para>
+/// </summary>
 void CBird::FixedUpdate()
 {
 	sf::Vector2f screenPos = util::WorldToScreen(m_body->GetPosition());
@@ -80,6 +102,11 @@ void CBird::FixedUpdate()
 	}
 }
 
+/// <summary>
+/// Collisions for bird
+/// <para>Author: Keane</para>
+/// </summary>
+/// <param name="_data"></param>
 void CBird::OnCollisionEnter(CollisionData _data)
 {
 	if (_data.other->GetBody()->GetFixtureList()->IsSensor()) return;
@@ -87,11 +114,19 @@ void CBird::OnCollisionEnter(CollisionData _data)
 	std::cout << "Bird col\n";
 }
 
+/// <summary>
+/// Code to execute while in moving state
+/// <para>Author: Keane</para>
+/// </summary>
 void CBird::DoMoving()
 {
 	//std::cout << "Do Moving\n";
 }
 
+/// <summary>
+/// Code to execute while in shooting state
+/// <para>Author: Keane</para>
+/// </summary>
 void CBird::DoShooting()
 {
 	//std::cout << "Do Shooting\n";
@@ -140,6 +175,7 @@ void CBird::DoShooting()
 
 /// <summary>
 /// Attempt to pull back the bird
+/// <para>Author: Keane</para>
 /// </summary>
 void CBird::PullBack()
 {
@@ -161,6 +197,7 @@ void CBird::PullBack()
 
 /// <summary>
 /// Attempt to shoot the bird from the current pos
+/// <para>Author: Keane</para>
 /// </summary>
 void CBird::TryShoot()
 {
@@ -175,11 +212,19 @@ void CBird::TryShoot()
 	std::cout << "\nShoot Vel: " << m_body->GetLinearVelocity().Length() << "\n\n";
 }
 
+/// <summary>
+/// Code to execute while in waiting state
+/// <para>Author: Keane</para>
+/// </summary>
 void CBird::DoWaiting()
 {
 	//std::cout << "Do Waiting\n";
 }
 
+/// <summary>
+/// DO NOT CALL, use .Destroy() instead
+/// <para>Author: Keane</para>
+/// </summary>
 CBird::~CBird()
 {
 	std::cout << "--Delete bird\n";

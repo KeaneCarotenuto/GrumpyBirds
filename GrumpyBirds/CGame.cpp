@@ -6,6 +6,10 @@ CGame::~CGame()
 {
 }
 
+/// <summary>
+/// Basic constructor
+/// <para>Author: Keane</para>
+/// </summary>
 CGame::CGame()
 {
 	b2Vec2 gravity = b2Vec2(0.0, -9.81f);
@@ -13,6 +17,11 @@ CGame::CGame()
 	m_world->SetContactListener(&m_collisionDetector);
 }
 
+/// <summary>
+/// Returns singleton
+/// <para>Author: Keane</para>
+/// </summary>
+/// <returns></returns>
 CGame* CGame::GetInstance()
 {
 	if (m_instance == nullptr) {
@@ -22,6 +31,11 @@ CGame* CGame::GetInstance()
 	return m_instance;
 }
 
+/// <summary>
+/// Change the level
+/// <para>Author: Keane</para>
+/// </summary>
+/// <param name="_newLevel"></param>
 void CGame::SetLevel(Level _newLevel)
 {
 	m_currentLevel = _newLevel;
@@ -29,6 +43,10 @@ void CGame::SetLevel(Level _newLevel)
 	Init();
 }
 
+/// <summary>
+/// Initialises level when changing
+/// <para>Author: Keane</para>
+/// </summary>
 void CGame::Init()
 {
 	if (m_isInitialised) return;
@@ -110,6 +128,10 @@ void CGame::Init()
 	}
 }
 
+/// <summary>
+/// Find bird to be shot
+/// <para>Author: Keane</para>
+/// </summary>
 void CGame::FindNewShooter()
 {
 	m_currentShooter = nullptr;
@@ -123,6 +145,10 @@ void CGame::FindNewShooter()
 	}
 }
 
+/// <summary>
+/// Clears level
+/// <para>Author: Keane</para>
+/// </summary>
 void CGame::Clear()
 {
 	if (!m_isInitialised) return;
@@ -135,6 +161,10 @@ void CGame::Clear()
 	m_isInitialised = false;
 }
 
+/// <summary>
+/// Fixed update for level
+/// <para>Author: Keane</para>
+/// </summary>
 void CGame::FixedUpdate()
 {
 	if (!m_isInitialised) return;

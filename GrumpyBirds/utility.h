@@ -5,6 +5,10 @@
 
 #define SCALE (float)30.0f
 
+/// <summary>
+/// Utility namepsace for commonly used functions
+/// <para>Author: Keane</para>
+/// </summary>
 namespace util {
 	extern sf::RenderWindow* window;
 

@@ -3,7 +3,10 @@
 #include "CBody.h"
 #include "utility.h"
 
-
+/// <summary>
+/// Destructable blocks class
+/// <para>Author: Nerys</para>
+/// </summary>
 class CDestructibleBlock : public CBody
 {
 public:

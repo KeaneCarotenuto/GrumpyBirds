@@ -3,6 +3,10 @@
 #include "CBody.h"
 #include "utility.h"
 
+/// <summary>
+/// Bird class to manage shooting, collisions, and states
+/// <para>Author: Keane</para>
+/// </summary>
 class CBird : public CBody
 {
 public:

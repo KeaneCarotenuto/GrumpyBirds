@@ -15,6 +15,10 @@
 //forward
 class CBody;
 
+/// <summary>
+/// Collision data to pass to collision methods
+/// <para>Author: Nerys</para>
+/// </summary>
 struct CollisionData
 {
 	CBody* other;
@@ -24,6 +28,10 @@ struct CollisionData
 	b2Vec2 CollisionNormal;
 };
 
+/// <summary>
+/// Body class for all gameobjects. Manages things like sprites, rigid bodies, collisions, updates, drawing
+/// <para>Author: Keane</para>
+/// </summary>
 class CBody
 {
 public:

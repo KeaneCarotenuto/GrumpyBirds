@@ -3,7 +3,10 @@
 #include "CBody.h"
 #include "utility.h"
 
-
+/// <summary>
+/// Pig class
+/// <para>Author: Nerys</para>
+/// </summary>
 class CPig : public CBody
 {
 public:

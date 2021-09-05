@@ -6,6 +6,10 @@ sf::RenderWindow* CBody::m_window;
 std::vector<CBody*> CBody::m_allBodies;
 std::vector<CBody*> CBody::m_toDelete;
 
+/// <summary>
+/// Destroy any objects that need to be destroyed
+/// <para>Author: Keane</para>
+/// </summary>
 void CBody::TryDestroys()
 {
     std::vector<CBody*> failedDelete;
@@ -28,6 +32,15 @@ void CBody::TryDestroys()
     m_toDelete = failedDelete;
 }
 
+/// <summary>
+/// Constructor for rectangle body
+/// <para>Author: Keane</para>
+/// </summary>
+/// <param name="_world"> box2d world it will be in</param>
+/// <param name="_position"> spawn position</param>
+/// <param name="_size"> width and height</param>
+/// <param name="_type"> body type</param>
+/// <param name="_imgName"> sprite name</param>
 CBody::CBody(b2World* _world, sf::Vector2f _position, sf::Vector2f _size, b2BodyType _type, std::string _imgName)
 {
     m_world = _world;
@@ -64,6 +77,15 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, sf::Vector2f _size, b2Body
     m_allBodies.push_back(this);
 }
 
+/// <summary>
+/// Constructor for circle body
+/// <para>Author: Keane</para>
+/// </summary>
+/// <param name="_world"> box2d world it will be in</param>
+/// <param name="_position"> spawn position</param>
+/// <param name="_size"> width and height</param>
+/// <param name="_type"> body type</param>
+/// <param name="_imgName"> sprite name</param>
 CBody::CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName)
 {
     m_world = _world;
@@ -98,6 +120,10 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType 
     m_allBodies.push_back(this);
 }
 
+/// <summary>
+/// Use this instead of delete
+/// <para>Author: Keane</para>
+/// </summary>
 void CBody::Destroy()
 {
     std::cout << "-Destroy body\n";
@@ -111,6 +137,10 @@ void CBody::Destroy()
     }
 }
 
+/// <summary>
+/// Draws sprite using body transform
+/// <para>Author: Keane</para>
+/// </summary>
 void CBody::Draw()
 {
     //update visual
@@ -120,15 +150,28 @@ void CBody::Draw()
     m_window->draw(*m_sprite);
 }
 
+/// <summary>
+/// Virtual fixed update
+/// <para>Author: Keane</para>
+/// </summary>
 void CBody::FixedUpdate()
 {
 }
 
+/// <summary>
+/// Virtual collision call
+/// <para>Author: Keane</para>
+/// </summary>
+/// <param name="_data"></param>
 void CBody::OnCollisionEnter(CollisionData _data)
 {
     std::cout << "Body col\n";
 }
 
+/// <summary>
+/// DO NOT CALL, use .Destroy() instead
+/// <para>Author: Keane</para>
+/// </summary>
 CBody::~CBody()
 {
     std::cout << "---Delete Body\n\n";

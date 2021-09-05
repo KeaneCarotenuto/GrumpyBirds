@@ -9,6 +9,10 @@
 
 #define FILEPATH "Resources/Graphics/"
 
+/// <summary>
+/// Resource manager class
+/// <para>Author: Nerys</para>
+/// </summary>
 class CResourceManager
 {
 public:

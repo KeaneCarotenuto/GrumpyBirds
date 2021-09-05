@@ -10,6 +10,10 @@
 #include "utility.h"
 #include "CCollision.h"
 
+/// <summary>
+/// Game class to manage the current level. Stores birds, pigs, blocks, world, and nearly everything needed for a level to work.
+/// <para>Author: Keane</para>
+/// </summary>
 class CGame
 {
 public:

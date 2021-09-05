@@ -10,6 +10,12 @@ CCollision::~CCollision()
 {
 }
 
+/// <summary>
+/// Callback from box2D for collisions
+/// <para>Primary Author: Nerys</para>
+/// <para>Secondary Author: Keane (only about 6 lines)</para>
+/// </summary>
+/// <param name="_contact"></param>
 void CCollision::BeginContact(b2Contact* _contact)
 {
 	auto bodyUserDataOne = (CBody*)_contact->GetFixtureA()->GetBody()->GetUserData().pointer;
@@ -44,14 +50,6 @@ void CCollision::BeginContact(b2Contact* _contact)
         CBodyA->OnCollisionEnter(bData);
         CBodyB->OnCollisionEnter(aData);
     }
-
-	/*if (dynamic_cast<CBird*>(bodyUserDataOne)) {
-		dynamic_cast<CBird*>(bodyUserDataOne)->Collision();
-	}
-
-	if (dynamic_cast<CBird*>(bodyUserDataTwo)) {
-		dynamic_cast<CBird*>(bodyUserDataTwo)->Collision();
-	}*/
 }
 
 void CCollision::EndContact(b2Contact* _contact)
