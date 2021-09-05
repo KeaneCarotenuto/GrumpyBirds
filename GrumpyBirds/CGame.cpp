@@ -106,7 +106,12 @@ void CGame::Init()
 		revoluteJointDef4.localAnchorB.Set(0, 0);
 		m_world->CreateJoint(&revoluteJointDef4);
 
-		CBody* myGround = new CBody(m_world, { 800,5 }, { 1600,10 }, b2_staticBody, "Rect.png");		m_allGround.push_back(myGround);
+		CBody* myGround = new CBody(m_world, { 800,-100 }, { 1600,215 }, b2_staticBody, "ground.png");		m_allGround.push_back(myGround);
+		CBody* myGrass = new CBody(m_world, { 800, 15 }, { 1600,28 }, b2_staticBody, "grass.png");		m_allGround.push_back(myGrass);
+		myGrass->GetBody()->GetFixtureList()->SetSensor(true);
+
+		CBody* slingImg = new CBody(m_world, shootPos, { 10,10 }, b2_staticBody, "Circle.png");		m_allGround.push_back(slingImg);
+		slingImg->GetBody()->GetFixtureList()->SetSensor(true);
 
 		FindNewShooter();
 

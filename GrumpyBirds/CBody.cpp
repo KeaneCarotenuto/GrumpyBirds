@@ -51,10 +51,12 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, sf::Vector2f _size, b2Body
 
     sf::Vector2f imgSize = { 0,0 };
 
-    if (!m_texture->loadFromImage(*CResourceManager::GetImage(_imgName))) {
+    if (!CResourceManager::GetImage(_imgName) || !m_texture->loadFromImage(*CResourceManager::GetImage(_imgName))) {
         std::cerr << "\nWARNING: <CBody::CBody> [_img] does not exist.\n";
     }
-    imgSize = (sf::Vector2f)CResourceManager::GetImage(_imgName)->getSize();
+    else {
+        imgSize = (sf::Vector2f)CResourceManager::GetImage(_imgName)->getSize();
+    }
     (m_sprite)->setTexture(*m_texture);
     (m_sprite)->setOrigin(m_sprite->getGlobalBounds().width / 2, m_sprite->getGlobalBounds().height / 2);
     (m_sprite)->setScale(_size.x / imgSize.x, _size.y / imgSize.y);
@@ -94,10 +96,13 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType 
     (m_sprite)->setPosition(_position);
     m_texture = new sf::Texture();
     sf::Vector2f imgSize = { 0,0 };
-    if (!m_texture->loadFromImage(*CResourceManager::GetImage(_imgName))) {
+    if (!CResourceManager::GetImage(_imgName) || !m_texture->loadFromImage(*CResourceManager::GetImage(_imgName))) {
         std::cerr << "\nWARNING: <CBody::CBody> [_img] does not exist.\n";
     }
-    imgSize = (sf::Vector2f)CResourceManager::GetImage(_imgName)->getSize();
+    else {
+        imgSize = (sf::Vector2f)CResourceManager::GetImage(_imgName)->getSize();
+    }
+    
     (m_sprite)->setTexture(*m_texture);
     (m_sprite)->setOrigin(m_sprite->getGlobalBounds().width / 2, m_sprite->getGlobalBounds().height / 2);
     (m_sprite)->setScale(_radius * 2 / imgSize.x, _radius * 2 / imgSize.y);

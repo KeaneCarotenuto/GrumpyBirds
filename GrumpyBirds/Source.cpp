@@ -10,8 +10,6 @@
 #include "CGame.h"
 #include "utility.h"
 
-
-
 int FixedUpdate();
 void Draw();
 
@@ -47,6 +45,8 @@ int main()
 
 	CResourceManager::LoadImage("Rect.png");
 	CResourceManager::LoadImage("Circle.png");
+	CResourceManager::LoadImage("ground.png");
+	CResourceManager::LoadImage("grass.png");
 	CResourceManager::LoadImage("Bird_Regular_1.png");
 	CResourceManager::LoadImage("Pig_Regular_1.png");
 	CResourceManager::LoadImage("Block_Wood_Regular_1.png");
