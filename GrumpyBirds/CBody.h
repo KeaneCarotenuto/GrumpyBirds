@@ -31,7 +31,14 @@ public:
 
 	virtual void FixedUpdate();
 
-private:
+protected:
+	//DO NOT CALL THIS, use .Destroy() INSTEAD!
+	virtual ~CBody();
+
+	static sf::RenderWindow* m_window;
+	static std::vector<CBody*> m_allBodies;
+	static std::vector<CBody*> m_toDelete;
+
 	//SFML
 	sf::Texture* m_texture;
 	sf::Sprite* m_sprite;
@@ -42,13 +49,5 @@ private:
 	b2Body* m_body;
 	b2Shape* m_shape;
 	b2FixtureDef* m_fixture;
-
-protected:
-	//DO NOT CALL THIS, use .Destroy() INSTEAD!
-	virtual ~CBody();
-
-	static sf::RenderWindow* m_window;
-	static std::vector<CBody*> m_allBodies;
-	static std::vector<CBody*> m_toDelete;
 };
 
