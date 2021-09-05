@@ -43,7 +43,7 @@ private:
 
 	static CGame* m_instance;
 
-	sf::RenderWindow* m_window;
+	sf::RenderWindow* m_window = nullptr;
 
 	CGame::Level m_currentLevel = Level::One;
 
