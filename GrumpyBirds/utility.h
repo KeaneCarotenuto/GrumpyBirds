@@ -1,4 +1,5 @@
-#pragma once
+#ifndef UTILITY_H
+#define UTILITY_H
 #include "SFML/Graphics.hpp"
 #include "box2d/box2d.h"
 
@@ -48,3 +49,4 @@ namespace util {
 		return ((1.0f / Mag(_a)) * _a);
 	}
 }
+#endif

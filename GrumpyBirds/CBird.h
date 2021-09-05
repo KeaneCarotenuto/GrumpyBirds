@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CBIRD_H
+#define CBIRD_H
 #include "CBody.h"
 #include "utility.h"
 
@@ -57,4 +58,5 @@ private:
 protected:
 	~CBird();
 };
+#endif
 

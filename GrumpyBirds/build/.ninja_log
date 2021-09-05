@@ -1,10 +1,15 @@
 # ninja log v5
 1	806	1630648676364115863	CMakeFiles/MyExecutable.dir/Source.cpp.o	462b70a7d3147e5a
 1	715	1630648676274116345	CMakeFiles/MyExecutable.dir/CResourceManager.cpp.o	e42d83b4a0450224
-1	743	1630832452437769350	CMakeFiles/GrumpyBirds.dir/CGame.cpp.o	fe3d3b67d17fe79e
-1	728	1630832452421102801	CMakeFiles/GrumpyBirds.dir/Source.cpp.o	6e639e0d7f662e59
-743	840	1630832452534435322	GrumpyBirds	51602aa838f87f4c
+1	774	1630844897555355945	CMakeFiles/GrumpyBirds.dir/CGame.cpp.o	fe3d3b67d17fe79e
+1	777	1630844897558689255	CMakeFiles/GrumpyBirds.dir/Source.cpp.o	6e639e0d7f662e59
+632	701	1630845831551800113	GrumpyBirds	95dfbfedecfb79ef
 1	670	1630648837203207404	CMakeFiles/GrumpyBirds.dir/CResourceManager.cpp.o	1ff654186769dd9c
-0	681	1630831057511111305	CMakeFiles/GrumpyBirds.dir/CBird.cpp.o	c0e2adb8d1351bb9
-0	708	1630831057537777780	CMakeFiles/GrumpyBirds.dir/CCollision.cpp.o	2eef96bc930499e6
-0	817	1630831057647776991	CMakeFiles/GrumpyBirds.dir/CBody.cpp.o	bd32cca6fd807083
+1	636	1630845734489202774	CMakeFiles/GrumpyBirds.dir/CBird.cpp.o	c0e2adb8d1351bb9
+0	632	1630845831485133952	CMakeFiles/GrumpyBirds.dir/CDestructibleBlock.cpp.o	2e0f24d9d7cd53ac
+1	654	1630844930038461807	CMakeFiles/GrumpyBirds.dir/CCollision.cpp.o	2eef96bc930499e6
+0	782	1630844897562022565	CMakeFiles/GrumpyBirds.dir/CBody.cpp.o	bd32cca6fd807083
+0	641	1630845862561564497	CMakeFiles/GrumpyBirds.dir/CPig.cpp.o	eb799426dcc09713
+641	721	1630845862641563888	GrumpyBirds	5600c35621226022
+1	724	1630846008430453561	CMakeFiles/GrumpyBirds.dir/CGame.cpp.o	fe3d3b67d17fe79e
+724	815	1630846008520452874	GrumpyBirds	5600c35621226022

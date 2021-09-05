@@ -1,5 +1,6 @@
 #include "CCollision.h"
 #include "CBird.h"
+#include "CDestructibleBlock.h"
 
 CCollision::CCollision()
 {

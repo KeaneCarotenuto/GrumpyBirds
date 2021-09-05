@@ -9,6 +9,7 @@ CBird::CBird(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType 
 	m_body->GetUserData().pointer = (uintptr_t)(this);
 
 	SetState(BirdState::Waiting);
+	m_name = "BIRD";
 }
 
 void CBird::SetState(BirdState _state)
