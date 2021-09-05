@@ -84,7 +84,7 @@ void CBird::OnCollisionEnter(CollisionData _data)
 {
 	if (_data.other->GetBody()->GetFixtureList()->IsSensor()) return;
 
-	std::cout << "Bird Col\n";
+	std::cout << "Bird col\n";
 }
 
 void CBird::DoMoving()
@@ -172,7 +172,7 @@ void CBird::TryShoot()
 	}
 
 	m_body->SetLinearVelocity(newVel);
-	std::cout << "Vel: " << m_body->GetLinearVelocity().Length() << "\n";
+	std::cout << "\nShoot Vel: " << m_body->GetLinearVelocity().Length() << "\n\n";
 }
 
 void CBird::DoWaiting()
@@ -182,5 +182,5 @@ void CBird::DoWaiting()
 
 CBird::~CBird()
 {
-	std::cout << "Delete bird\n";
+	std::cout << "--Delete bird\n";
 }

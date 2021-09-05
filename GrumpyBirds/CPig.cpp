@@ -14,10 +14,14 @@ void CPig::FixedUpdate() {
 }
 
 void CPig::Destroy() {
+    std::cout << "Destroy pig\n";
+
     CBody::Destroy();
 }
 
 void CPig::OnCollisionEnter(CollisionData _data) {
+    std::cout << "Pig col\n";
+
     if (_data.ObjName == "BIRD")
     {
         Destroy();
@@ -26,5 +30,5 @@ void CPig::OnCollisionEnter(CollisionData _data) {
 }
 
 CPig::~CPig() {
-    
+    std::cout << "--Delete pig\n";
 }

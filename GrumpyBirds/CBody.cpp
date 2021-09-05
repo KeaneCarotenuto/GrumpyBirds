@@ -1,5 +1,6 @@
 #include "CBody.h"
 #include "CBird.h"
+#include "CGame.h"
 
 sf::RenderWindow* CBody::m_window;
 std::vector<CBody*> CBody::m_allBodies;
@@ -125,12 +126,12 @@ void CBody::FixedUpdate()
 
 void CBody::OnCollisionEnter(CollisionData _data)
 {
-    std::cout << "Body Col\n";
+    std::cout << "Body col\n";
 }
 
 CBody::~CBody()
 {
-    std::cout << "-Delete Body\n";
+    std::cout << "---Delete Body\n\n";
 
     std::vector<CBody*>::iterator it = std::find(m_allBodies.begin(), m_allBodies.end(), this);
     if (it != m_allBodies.end()) {

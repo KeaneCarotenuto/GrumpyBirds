@@ -151,16 +151,20 @@
   <ItemGroup>
     <ClCompile Include="CBird.cpp" />
     <ClCompile Include="CBody.cpp" />
+    <ClCompile Include="CDestructibleBlock.cpp" />
     <ClCompile Include="CGame.cpp" />
     <ClCompile Include="CCollision.cpp" />
+    <ClCompile Include="CPig.cpp" />
     <ClCompile Include="CResourceManager.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBird.h" />
     <ClInclude Include="CBody.h" />
+    <ClInclude Include="CDestructibleBlock.h" />
     <ClInclude Include="CGame.h" />
     <ClInclude Include="CCollision.h" />
+    <ClInclude Include="CPig.h" />
     <ClInclude Include="CResourceManager.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="utility.h" />

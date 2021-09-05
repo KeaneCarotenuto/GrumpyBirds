@@ -41,6 +41,9 @@ int main()
 	CResourceManager::LoadImage("Rect.png");
 	CResourceManager::LoadImage("Circle.png");
 	CResourceManager::LoadImage("Bird_Regular_1.png");
+	CResourceManager::LoadImage("Pig_Regular_1.png");
+	CResourceManager::LoadImage("Block_Wood_Regular_1.png");
+	CResourceManager::LoadImage("Block_Wood_Circle_1.png");
 
 	//Start Game Scene up
 	//InitGameScene();

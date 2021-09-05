@@ -5,6 +5,8 @@
 
 #include "CBody.h"
 #include "CBird.h"
+#include "CPig.h"
+#include "CDestructibleBlock.h"
 #include "utility.h"
 #include "CCollision.h"
 
@@ -41,7 +43,8 @@ private:
 	CGame::Level m_currentLevel = Level::One;
 
 	std::vector<CBird*> m_allBirds;
-	std::vector<CBody*> m_allBlocks;
+	std::vector<CPig*> m_allPigs;
+	std::vector<CDestructibleBlock*> m_allBlocks;
 	std::vector<CBody*> m_allGround;
 
 	CBird* m_currentShooter = nullptr;

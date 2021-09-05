@@ -48,11 +48,13 @@ void CGame::Init()
 		CBird* bird2 = new CBird(m_world, { 50,35 }, 25, b2_dynamicBody, "Bird_Regular_1.png");				m_allBirds.push_back(bird2);
 		bird2->SetShootPos(shootPos);
 
-		CBody* anchor = new CBody(m_world, { 800,400 }, { 10,10 }, b2_staticBody, "Rect.png");		m_allBlocks.push_back(anchor);
-		CBody* rectBody = new CBody(m_world, { 800,800 }, { 100,20 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(rectBody);
-		CBody* rectBody2 = new CBody(m_world, { 800,800 }, { 100,20 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(rectBody2);
-		CBody* rectBody3 = new CBody(m_world, { 800,800 }, { 100,20 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(rectBody3);
-		CBody* circleBody = new CBody(m_world, { 800,700 }, 40, b2_dynamicBody, "Circle.png");		m_allBlocks.push_back(circleBody);
+		CPig* pig1 = new CPig(m_world, { 800,500 }, 25, b2_dynamicBody, "Pig_Regular_1.png");		m_allPigs.push_back(pig1);
+		
+		CDestructibleBlock* anchor = new CDestructibleBlock(m_world, { 800,400 }, { 10,10 }, b2_staticBody, "Block_Wood_Regular_1.png");		m_allBlocks.push_back(anchor);
+		CDestructibleBlock* rectBody = new CDestructibleBlock(m_world, { 800,800 }, { 100,20 }, b2_dynamicBody, "Block_Wood_Regular_1.png");		m_allBlocks.push_back(rectBody);
+		CDestructibleBlock* rectBody2 = new CDestructibleBlock(m_world, { 800,800 }, { 100,20 }, b2_dynamicBody, "Block_Wood_Regular_1.png");		m_allBlocks.push_back(rectBody2);
+		CDestructibleBlock* rectBody3 = new CDestructibleBlock(m_world, { 800,800 }, { 100,20 }, b2_dynamicBody, "Block_Wood_Regular_1.png");		m_allBlocks.push_back(rectBody3);
+		CDestructibleBlock* circleBody = new CDestructibleBlock(m_world, { 800,700 }, 40, b2_dynamicBody, "Block_Wood_Circle_1.png");		m_allBlocks.push_back(circleBody);
 
 		b2RevoluteJointDef revoluteJointDef1;
 		revoluteJointDef1.bodyA = anchor->GetBody();
@@ -96,7 +98,7 @@ void CGame::Init()
 	case Level::Two: {
 
 		CBird* circleBody = new CBird(m_world, { 426,800 }, 25, b2_dynamicBody, "Circle.png");							m_allBirds.push_back(circleBody);
-		CBody* squareBody = new CBody(m_world, { 200,300 }, { 50,50 }, b2_dynamicBody, "Rect.png");						m_allBlocks.push_back(squareBody);
+		//CBody* squareBody = new CBody(m_world, { 200,300 }, { 50,50 }, b2_dynamicBody, "Rect.png");						m_allBlocks.push_back(squareBody);
 
 		CBody* myGround = new CBody(m_world, { 400,100 }, { 750,100 }, b2_staticBody, "Rect.png");						m_allGround.push_back(myGround);
 		myGround->GETBODY_TODELETE()->SetTransform(myGround->GETBODY_TODELETE()->GetPosition(), 10 * (M_PI / 180.0));
@@ -126,6 +128,7 @@ void CGame::Clear()
 	if (!m_isInitialised) return;
 
 	for (CBird* _body : m_allBirds) { _body->Destroy(); };		m_allBirds.clear();
+	for (CPig* _body : m_allPigs) { _body->Destroy(); };		m_allPigs.clear();
 	for (CBody* _body : m_allBlocks) { _body->Destroy(); };		m_allBlocks.clear();
 	for (CBody* _body : m_allGround) { _body->Destroy(); };		m_allGround.clear();
 
