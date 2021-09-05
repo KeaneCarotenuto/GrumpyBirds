@@ -26,6 +26,8 @@ CGame* game = CGame::GetInstance();
 
 sf::RenderWindow* util::window = nullptr;
 
+sf::Text instructions;
+
 /// <summary>
 /// Setup and then running of the main loop.
 /// <para>Author: Keane</para>
@@ -38,7 +40,7 @@ int main()
     settings.antialiasingLevel = 8;
 
     window =  new sf::RenderWindow(sf::VideoMode(1600, 800), "SFML and box2D works!", sf::Style::Default, settings);
-    window->setFramerateLimit(60);
+    window->setFramerateLimit(60);	
     CBody::SetWindow(window);
 	game->SetWindow(window);
 	util::window = window;
@@ -49,6 +51,18 @@ int main()
 	CResourceManager::LoadImage("Pig_Regular_1.png");
 	CResourceManager::LoadImage("Block_Wood_Regular_1.png");
 	CResourceManager::LoadImage("Block_Wood_Circle_1.png");
+
+	CResourceManager::LoadFont("angrybirds.ttf");
+
+	instructions.setFont(*CResourceManager::GetFont("angrybirds.ttf"));
+	instructions.setPosition({ 20,20 });
+	instructions.setCharacterSize(25);
+	instructions.setString(
+		"Press [1] to start the level.\n"\
+		"Press [2] to clear the level.\n"\
+		"Drag and Release the raised bird to shoot.\n"\
+		"Level will clear after 5 seconds of last bird being shot."\
+	);
 
 	//Start Game Scene up
 	//InitGameScene();
@@ -107,13 +121,7 @@ int main()
 					game->SetLevel(CGame::Level::One);
 				}
 				if (newEvent.key.code == sf::Keyboard::Num2) {
-					game->SetLevel(CGame::Level::Two);
-				}
-				if (newEvent.key.code == sf::Keyboard::Num3) {
-					if (game->GetWorld()) myBird = new CBird(game->GetWorld(), { 226,800 }, 25, b2_dynamicBody, "Circle.png");
-				}
-				if (newEvent.key.code == sf::Keyboard::Num4) {
-					if (myBird) myBird->Destroy();
+					game->Clear();
 				}
 			}
 		}
@@ -136,6 +144,8 @@ void Draw() {
 	for (CBody* _body : CBody::GetAllBodies()) {
 		_body->Draw();
 	}
+
+	window->draw(instructions);
 
 	window->display();
 }
