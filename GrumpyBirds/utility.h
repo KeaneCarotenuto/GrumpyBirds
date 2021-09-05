@@ -29,11 +29,11 @@ namespace util {
 	}
 
 	static float Degrees(float _rad) {
-		return _rad * (180.0 / M_PI);
+		return _rad * (180.0f / (float)M_PI);
 	}
 
 	static float Radians(float _deg) {
-		return _deg / (180.0 / M_PI);
+		return _deg / (180.0f / (float)M_PI);
 	}
 
 

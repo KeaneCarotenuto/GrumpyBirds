@@ -124,7 +124,7 @@ void CGame::Init()
 		//CBody* squareBody = new CBody(m_world, { 200,300 }, { 50,50 }, b2_dynamicBody, "Rect.png");						m_allBlocks.push_back(squareBody);
 
 		CBody* myGround = new CBody(m_world, { 400,100 }, { 750,100 }, b2_staticBody, "Rect.png");						m_allGround.push_back(myGround);
-		myGround->GETBODY_TODELETE()->SetTransform(myGround->GETBODY_TODELETE()->GetPosition(), 10 * (M_PI / 180.0));
+		myGround->GETBODY_TODELETE()->SetTransform(myGround->GETBODY_TODELETE()->GetPosition(), 10 * ((float)M_PI / 180.0f));
 		break;
 	}
 
@@ -202,5 +202,5 @@ void CGame::FixedUpdate()
 		if (m_currentShooter->GetState() != CBird::BirdState::Shooting) FindNewShooter();
 	}
 
-	if (m_world) m_world->Step(timeStep, velocityIterations, positionIterations);
+	if (m_world) m_world->Step((float)timeStep, velocityIterations, positionIterations);
 }
