@@ -208,6 +208,13 @@ build CMakeFiles/GrumpyBirds.dir/CCollision.cpp.o: CXX_COMPILER__GrumpyBirds_Deb
   OBJECT_DIR = CMakeFiles/GrumpyBirds.dir
   OBJECT_FILE_DIR = CMakeFiles/GrumpyBirds.dir
 
+build CMakeFiles/GrumpyBirds.dir/CDestructibleBlock.cpp.o: CXX_COMPILER__GrumpyBirds_Debug /home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CDestructibleBlock.cpp || cmake_object_order_depends_target_GrumpyBirds
+  DEP_FILE = CMakeFiles/GrumpyBirds.dir/CDestructibleBlock.cpp.o.d
+  FLAGS = -g
+  INCLUDES = -I/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds
+  OBJECT_DIR = CMakeFiles/GrumpyBirds.dir
+  OBJECT_FILE_DIR = CMakeFiles/GrumpyBirds.dir
+
 build CMakeFiles/GrumpyBirds.dir/CGame.cpp.o: CXX_COMPILER__GrumpyBirds_Debug /home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CGame.cpp || cmake_object_order_depends_target_GrumpyBirds
   DEP_FILE = CMakeFiles/GrumpyBirds.dir/CGame.cpp.o.d
   FLAGS = -g
@@ -237,7 +244,7 @@ build CMakeFiles/GrumpyBirds.dir/Source.cpp.o: CXX_COMPILER__GrumpyBirds_Debug /
 #############################################
 # Link the executable GrumpyBirds
 
-build GrumpyBirds: CXX_EXECUTABLE_LINKER__GrumpyBirds_Debug CMakeFiles/GrumpyBirds.dir/CBird.cpp.o CMakeFiles/GrumpyBirds.dir/CBody.cpp.o CMakeFiles/GrumpyBirds.dir/CCollision.cpp.o CMakeFiles/GrumpyBirds.dir/CGame.cpp.o CMakeFiles/GrumpyBirds.dir/CResourceManager.cpp.o CMakeFiles/GrumpyBirds.dir/Source.cpp.o | /usr/lib/libsfml-graphics.so.2.5.1 /usr/lib/libsfml-window.so.2.5.1 /usr/lib/libsfml-system.so.2.5.1
+build GrumpyBirds: CXX_EXECUTABLE_LINKER__GrumpyBirds_Debug CMakeFiles/GrumpyBirds.dir/CBird.cpp.o CMakeFiles/GrumpyBirds.dir/CBody.cpp.o CMakeFiles/GrumpyBirds.dir/CCollision.cpp.o CMakeFiles/GrumpyBirds.dir/CDestructibleBlock.cpp.o CMakeFiles/GrumpyBirds.dir/CGame.cpp.o CMakeFiles/GrumpyBirds.dir/CResourceManager.cpp.o CMakeFiles/GrumpyBirds.dir/Source.cpp.o | /usr/lib/libsfml-graphics.so.2.5.1 /usr/lib/libsfml-window.so.2.5.1 /usr/lib/libsfml-system.so.2.5.1
   FLAGS = -g
   LINK_FLAGS = -rdynamic
   LINK_LIBRARIES = /usr/lib/libsfml-graphics.so.2.5.1  /usr/lib/libsfml-window.so.2.5.1  -lbox2d  /usr/lib/libsfml-system.so.2.5.1

@@ -16,6 +16,11 @@
 },
 {
   "directory": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/build",
+  "command": "/usr/bin/c++ -I/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds -g -o CMakeFiles/GrumpyBirds.dir/CDestructibleBlock.cpp.o -c /home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CDestructibleBlock.cpp",
+  "file": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CDestructibleBlock.cpp"
+},
+{
+  "directory": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/build",
   "command": "/usr/bin/c++ -I/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds -g -o CMakeFiles/GrumpyBirds.dir/CGame.cpp.o -c /home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CGame.cpp",
   "file": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CGame.cpp"
 },
