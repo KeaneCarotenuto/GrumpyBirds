@@ -41,7 +41,7 @@ private:
 	std::vector<CBody*> m_allBlocks;
 	std::vector<CBody*> m_allGround;
 
-	ColTest m_collisionDetector;
+	CCollision m_collisionDetector;
 
 	b2World* m_world = nullptr;
 
