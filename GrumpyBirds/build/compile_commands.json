@@ -1,6 +1,26 @@
 [
 {
   "directory": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/build",
+  "command": "/usr/bin/c++ -I/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds -g -o CMakeFiles/GrumpyBirds.dir/CBird.cpp.o -c /home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CBird.cpp",
+  "file": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CBird.cpp"
+},
+{
+  "directory": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/build",
+  "command": "/usr/bin/c++ -I/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds -g -o CMakeFiles/GrumpyBirds.dir/CBody.cpp.o -c /home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CBody.cpp",
+  "file": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CBody.cpp"
+},
+{
+  "directory": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/build",
+  "command": "/usr/bin/c++ -I/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds -g -o CMakeFiles/GrumpyBirds.dir/CCollision.cpp.o -c /home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CCollision.cpp",
+  "file": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CCollision.cpp"
+},
+{
+  "directory": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/build",
+  "command": "/usr/bin/c++ -I/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds -g -o CMakeFiles/GrumpyBirds.dir/CGame.cpp.o -c /home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CGame.cpp",
+  "file": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CGame.cpp"
+},
+{
+  "directory": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/build",
   "command": "/usr/bin/c++ -I/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds -g -o CMakeFiles/GrumpyBirds.dir/CResourceManager.cpp.o -c /home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CResourceManager.cpp",
   "file": "/home/neryst/Documents/Repos/GrumpyBirds/GrumpyBirds/CResourceManager.cpp"
 },

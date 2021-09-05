@@ -1,23 +1,24 @@
-#pragma once
+#ifndef CGAME_H
+#define CGAME_H
 #include <vector>
 
 #include "CBody.h"
 #include "CBird.h"
 #include "utility.h"
-#include "CCollision.h"
 
 class CGame
 {
 public:
-	enum class Level {
+	enum class Level
+	{
 		One = 1,
 		Two
 	};
 
-	static CGame* GetInstance();
+	static CGame *GetInstance();
 
-	void SetWindow(sf::RenderWindow* _wind) { m_window = _wind; };
-	sf::RenderWindow* GetWindow() { return m_window; };
+	void SetWindow(sf::RenderWindow *_wind) { m_window = _wind; };
+	sf::RenderWindow *GetWindow() { return m_window; };
 
 	void SetLevel(Level _newLevel);
 
@@ -25,25 +26,23 @@ public:
 	void Clear();
 	void FixedUpdate();
 
-	b2World* GetWorld() { return m_world; };
+	b2World *GetWorld() { return m_world; };
 
 private:
 	CGame();
 	~CGame();
 
-	static CGame* m_instance;
+	static CGame *m_instance;
 
-	sf::RenderWindow* m_window;
-
+	sf::RenderWindow *m_window;
+	CCollision m_collisionDetector;
 	CGame::Level m_currentLevel = Level::One;
 
-	std::vector<CBird*> m_allBirds;
-	std::vector<CBody*> m_allBlocks;
-	std::vector<CBody*> m_allGround;
+	std::vector<CBird *> m_allBirds;
+	std::vector<CBody *> m_allBlocks;
+	std::vector<CBody *> m_allGround;
 
-	CCollision m_collisionDetector;
-
-	b2World* m_world = nullptr;
+	b2World *m_world = nullptr;
 
 	double timeStep = (1.0f / 60.0f);
 	int32 velocityIterations = 6;
@@ -51,3 +50,4 @@ private:
 
 	bool m_isInitialised = false;
 };
+#endif
