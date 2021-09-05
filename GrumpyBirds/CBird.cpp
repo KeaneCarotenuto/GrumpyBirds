@@ -3,6 +3,8 @@
 CBird::CBird(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName) : 
 	CBody(_world, _position, _radius, _type, _imgName)
 {
+
+	m_body->GetUserData().pointer = (uintptr_t)(this);
 }
 
 void CBird::Destroy()
@@ -34,19 +36,24 @@ void CBird::FixedUpdate()
 	}
 }
 
+void CBird::Collision()
+{
+	std::cout << "COLLIDE\n";
+}
+
 void CBird::DoMoving()
 {
-	std::cout << "Do Moving\n";
+	//std::cout << "Do Moving\n";
 }
 
 void CBird::DoShooting()
 {
-	std::cout << "Do Shooting\n";
+	//std::cout << "Do Shooting\n";
 }
 
 void CBird::DoWaiting()
 {
-	std::cout << "Do Waiting\n";
+	//std::cout << "Do Waiting\n";
 }
 
 CBird::~CBird()

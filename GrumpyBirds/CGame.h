@@ -4,6 +4,7 @@
 #include "CBody.h"
 #include "CBird.h"
 #include "utility.h"
+#include "CCollision.h"
 
 class CGame
 {
@@ -39,6 +40,8 @@ private:
 	std::vector<CBird*> m_allBirds;
 	std::vector<CBody*> m_allBlocks;
 	std::vector<CBody*> m_allGround;
+
+	ColTest m_collisionDetector;
 
 	b2World* m_world = nullptr;
 

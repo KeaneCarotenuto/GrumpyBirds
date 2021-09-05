@@ -2,9 +2,6 @@
 #include "CBody.h"
 #include "utility.h"
 
-//forward declare
-class CBird;
-
 class CBird : public CBody
 {
 public:
@@ -28,6 +25,8 @@ public:
 	void Destroy();
 
 	void FixedUpdate();
+
+	void Collision();
 
 private:
 	void DoWaiting();

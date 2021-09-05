@@ -10,6 +10,7 @@ CGame::CGame()
 {
 	b2Vec2 gravity = b2Vec2(0.0, -9.81f);
 	m_world = new b2World(gravity);
+	m_world->SetContactListener(&m_collisionDetector);
 }
 
 CGame* CGame::GetInstance()

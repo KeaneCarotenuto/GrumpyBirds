@@ -152,6 +152,7 @@
     <ClCompile Include="CBird.cpp" />
     <ClCompile Include="CBody.cpp" />
     <ClCompile Include="CGame.cpp" />
+    <ClCompile Include="CCollision.cpp" />
     <ClCompile Include="CResourceManager.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="CBird.h" />
     <ClInclude Include="CBody.h" />
     <ClInclude Include="CGame.h" />
+    <ClInclude Include="CCollision.h" />
     <ClInclude Include="CResourceManager.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="utility.h" />

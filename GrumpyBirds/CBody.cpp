@@ -54,6 +54,8 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, sf::Vector2f _size, b2Body
     m_fixture->shape = m_shape;
     m_body->CreateFixture(m_fixture);
 
+    m_body->GetUserData().pointer = (uintptr_t)(this);
+
     m_allBodies.push_back(this);
 }
 
@@ -83,6 +85,8 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType 
     m_fixture->density = 1.f;
     m_fixture->shape = m_shape;
     m_body->CreateFixture(m_fixture);
+
+    m_body->GetUserData().pointer = (uintptr_t)(this);
 
     m_allBodies.push_back(this);
 }

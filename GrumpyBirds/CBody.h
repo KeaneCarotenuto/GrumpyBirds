@@ -9,6 +9,9 @@
 #include "CResourceManager.h"
 #include "utility.h"
 
+//forward declare
+class CBird;
+
 class CBody
 {
 public:
