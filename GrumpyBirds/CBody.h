@@ -8,9 +8,15 @@
 
 #include "CResourceManager.h"
 #include "utility.h"
+#include "CCollision.h"
 
-//forward declare
-class CBird;
+struct CollisionData
+{
+	std::string ObjName;
+	b2Vec2 Velocity;
+	float ObjMass;
+	b2Vec2 CollisionNormal;
+};
 
 class CBody
 {
@@ -34,6 +40,12 @@ public:
 
 	virtual void FixedUpdate();
 
+	virtual void OnCollisionEnter(CollisionData _data);
+
+	std::string GetName() { return m_name; };
+
+	b2Body* GetBody() { return m_body; };
+
 protected:
 	//DO NOT CALL THIS, use .Destroy() INSTEAD!
 	virtual ~CBody();
@@ -41,6 +53,8 @@ protected:
 	static sf::RenderWindow* m_window;
 	static std::vector<CBody*> m_allBodies;
 	static std::vector<CBody*> m_toDelete;
+
+	std::string m_name;
 
 	//SFML
 	sf::Texture* m_texture;

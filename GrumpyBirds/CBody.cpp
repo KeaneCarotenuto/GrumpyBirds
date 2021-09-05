@@ -117,6 +117,11 @@ void CBody::FixedUpdate()
 {
 }
 
+void CBody::OnCollisionEnter(CollisionData _data)
+{
+    std::cout << "Body Col\n";
+}
+
 CBody::~CBody()
 {
     std::cout << "-Delete Body\n";

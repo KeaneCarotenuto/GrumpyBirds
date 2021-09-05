@@ -1,5 +1,7 @@
 #include "CBird.h"
 
+#include"CCollision.h"
+
 CBird::CBird(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName) : 
 	CBody(_world, _position, _radius, _type, _imgName)
 {
@@ -36,9 +38,10 @@ void CBird::FixedUpdate()
 	}
 }
 
-void CBird::Collision()
+void CBird::OnCollisionEnter(CollisionData _data)
 {
-	std::cout << "COLLIDE\n";
+	std::cout << "Bird Col\n";
+	std::cout << "- x:" << _data.Velocity.x << ", y:" << _data.Velocity.y << "\n";
 }
 
 void CBird::DoMoving()

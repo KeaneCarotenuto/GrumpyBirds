@@ -26,7 +26,7 @@ public:
 
 	void FixedUpdate();
 
-	void Collision();
+	void OnCollisionEnter(CollisionData _data);
 
 private:
 	void DoWaiting();
