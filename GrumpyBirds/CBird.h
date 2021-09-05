@@ -38,16 +38,21 @@ private:
 	void DoMoving();
 	void DoShooting();
 
+	void PullBack();
+
+	void TryShoot();
+
 	BirdType m_type = BirdType::Regular;
 	BirdState m_state = BirdState::Waiting;
 
 	sf::Vector2f m_shootPos = {0,0};
 	float m_pullBackDist = 100.0f;
 	float m_shootMulti = 10.0f;
-	float m_maxShootSpeed = 10.0f;
+	float m_maxShootSpeed = 30.0f;
 
 	bool m_mouseHolding = false;
 	bool m_mouseDown = false;
+	bool releasedThisFrame = false;
 
 protected:
 	~CBird();

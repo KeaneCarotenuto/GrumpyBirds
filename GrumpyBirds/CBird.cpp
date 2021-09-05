@@ -95,16 +95,20 @@ void CBird::DoShooting()
 {
 	//std::cout << "Do Shooting\n";
 
-	bool releasedThisFrame = false;
 
+	//get mouse pos
 	sf::Vector2f mousePos = sf::Vector2f(sf::Mouse::getPosition(*m_window));
 
+	//if mouse is pressed, try grab
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
-
+		
+		//if the mouse is being pressed this frame
 		if (!m_mouseDown) {
 			m_mouseDown = true;
 
+			//If not holding a bird, check if the mouse intersects the main bird.
 			if (!m_mouseHolding && m_sprite->getGlobalBounds().contains(mousePos)) {
+				//if so, start trying holding bird
 				m_mouseHolding = true;
 			}
 		}
@@ -118,27 +122,56 @@ void CBird::DoShooting()
 	}
 
 	if (m_mouseHolding) {
-		sf::Vector2f newPos = util::V(util::ScreenToWorld(mousePos));
-		sf::Vector2f shootVector = (m_shootPos - newPos);
-
-		if (util::Mag(shootVector) >= m_pullBackDist) {
-			shootVector = util::Normalize(shootVector) * m_pullBackDist;
-		}
-		m_body->SetTransform(util::V(m_shootPos - shootVector), m_body->GetAngle());
+		//If holding on bird, try grab it
+		PullBack();
 	}
 	else {
+		//if mouse was let go this frame, try shoot the bird
 		if (releasedThisFrame) {
-			SetState(BirdState::Moving);
-			b2Vec2 newVel = m_shootMulti * (util::V(m_shootPos) - m_body->GetPosition());
-
-			m_body->SetLinearVelocity(newVel);
-			std::cout << "Vel: " << m_body->GetLinearVelocity().Length() << "\n";
+			TryShoot();
 		}
 		else {
+			//otherwise, set the bird pos back to the shootpos
 			m_body->SetTransform(util::V(m_shootPos), m_body->GetAngle());
 		}
-		
 	}
+}
+
+/// <summary>
+/// Attempt to pull back the bird
+/// </summary>
+void CBird::PullBack()
+{
+	//get mouse pos, then get pos in world
+	sf::Vector2f mousePos = sf::Vector2f(sf::Mouse::getPosition(*m_window));
+	sf::Vector2f mouseWorldPos = util::V(util::ScreenToWorld(mousePos));
+
+	//calc desired aim vec
+	sf::Vector2f aimVector = (m_shootPos - mouseWorldPos);
+
+	//If aim vec is too far, cap it at max distance
+	if (util::Mag(aimVector) >= m_pullBackDist) {
+		aimVector = util::Normalize(aimVector) * m_pullBackDist;
+	}
+
+	//set bird to pos of aim vec
+	m_body->SetTransform(util::V(m_shootPos - aimVector), m_body->GetAngle());
+}
+
+/// <summary>
+/// Attempt to shoot the bird from the current pos
+/// </summary>
+void CBird::TryShoot()
+{
+	SetState(BirdState::Moving);
+	b2Vec2 newVel = m_shootMulti * (util::V(m_shootPos) - m_body->GetPosition());
+
+	if (util::Mag(newVel) >= m_maxShootSpeed) {
+		newVel = m_maxShootSpeed * util::Normalize(newVel);
+	}
+
+	m_body->SetLinearVelocity(newVel);
+	std::cout << "Vel: " << m_body->GetLinearVelocity().Length() << "\n";
 }
 
 void CBird::DoWaiting()

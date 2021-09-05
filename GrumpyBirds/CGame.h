@@ -48,7 +48,7 @@ private:
 
 	sf::Clock m_gameClock;
 	float m_timeout = 0;
-	float m_maxTimeout = 3;
+	float m_maxTimeout = 5;
 
 	CCollision m_collisionDetector;
 

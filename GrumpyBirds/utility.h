@@ -39,4 +39,12 @@ namespace util {
 	static sf::Vector2f Normalize(sf::Vector2f _a) {
 		return (_a / Mag(_a));
 	}
+
+	static float Mag(b2Vec2 _a) {
+		return abs(sqrt(_a.x * _a.x + _a.y * _a.y));
+	}
+
+	static b2Vec2 Normalize(b2Vec2 _a) {
+		return ((1.0f / Mag(_a)) * _a);
+	}
 }
