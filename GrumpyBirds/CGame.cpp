@@ -42,10 +42,10 @@ void CGame::Init()
 
 		sf::Vector2f shootPos = { 200,100 };
 
-		CBird* bird1 = new CBird(m_world, { 100,35 }, 25, b2_dynamicBody, "Circle.png");				m_allBirds.push_back(bird1);
+		CBird* bird1 = new CBird(m_world, { 100,35 }, 25, b2_dynamicBody, "Bird_Regular_1.png");				m_allBirds.push_back(bird1);
 		bird1->SetShootPos(shootPos);
 
-		CBird* bird2 = new CBird(m_world, { 50,35 }, 25, b2_dynamicBody, "Circle.png");				m_allBirds.push_back(bird2);
+		CBird* bird2 = new CBird(m_world, { 50,35 }, 25, b2_dynamicBody, "Bird_Regular_1.png");				m_allBirds.push_back(bird2);
 		bird2->SetShootPos(shootPos);
 
 		CBody* squareBody = new CBody(m_world, { 800,700 }, { 50,50 }, b2_dynamicBody, "Rect.png");		m_allBlocks.push_back(squareBody);

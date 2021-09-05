@@ -40,6 +40,7 @@ int main()
 
 	CResourceManager::LoadImage("Rect.png");
 	CResourceManager::LoadImage("Circle.png");
+	CResourceManager::LoadImage("Bird_Regular_1.png");
 
 	//Start Game Scene up
 	//InitGameScene();
