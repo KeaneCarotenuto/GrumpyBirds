@@ -1,3 +1,14 @@
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+// (c) 2021 Media Design School
+//
+// File Name   : CBird.hpp
+// Description : Bird Class
+// Authors     : Keane Carotenuto
+// Mail        : KeaneCarotenuto@gmail.com
+
 #ifndef CBIRD_H
 #define CBIRD_H
 #include "CBody.h"

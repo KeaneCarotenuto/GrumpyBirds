@@ -1,3 +1,14 @@
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+// (c) 2021 Media Design School
+//
+// File Name   : CCollision.h
+// Description : Collision class
+// Authors     : Keane Carotenuto, Nerys Thamm
+// Mail        : KeaneCarotenuto@gmail.com, nerysthamm@gmail.com
+
 #ifndef CCOLLISION_H
 #define CCOLLISION_H
 #include "box2d/box2d.h"

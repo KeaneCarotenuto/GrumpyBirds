@@ -1,3 +1,14 @@
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+// (c) 2021 Media Design School
+//
+// File Name   : CBody.cpp
+// Description : Body class
+// Authors     : Keane Carotenuto
+// Mail        : KeaneCarotenuto@gmail.com
+
 #ifndef CBODY_H
 #define CBODY_H
 

@@ -1,3 +1,14 @@
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+// (c) 2021 Media Design School
+//
+// File Name   : CResourceManager.h
+// Description : Resource manager, allows images and fonts to be stored easily
+// Authors     : Keane Carotenuto, Nerys Thamm
+// Mail        : KeaneCarotenuto@gmail.com, nerysthamm@gmail.com
+
 #ifndef CRESOURCEMANAGER_H
 #define CRESOURCEMANAGER_H
 

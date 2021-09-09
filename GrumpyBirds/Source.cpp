@@ -1,3 +1,14 @@
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+// (c) 2021 Media Design School
+//
+// File Name   : Source.cpp
+// Description : Main file for the Angry Birds clone 
+// Authors     : Keane Carotenuto, Nerys Thamm
+// Mail        : KeaneCarotenuto@gmail.com, nerysthamm@gmail.com
+
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 #include "SFML/Window.hpp"

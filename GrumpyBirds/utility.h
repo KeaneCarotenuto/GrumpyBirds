@@ -1,3 +1,14 @@
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+// (c) 2021 Media Design School
+//
+// File Name   : utility.h
+// Description : Utility file to keep useful functions
+// Authors     : Keane Carotenuto
+// Mail        : KeaneCarotenuto@gmail.com
+
 #ifndef UTILITY_H
 #define UTILITY_H
 #include "SFML/Graphics.hpp"

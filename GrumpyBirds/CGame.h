@@ -1,3 +1,14 @@
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+// (c) 2021 Media Design School
+//
+// File Name   : CGame.h
+// Description : Main Game management class
+// Authors     : Keane Carotenuto
+// Mail        : KeaneCarotenuto@gmail.com
+
 #ifndef CGAME_H
 #define CGAME_H
 

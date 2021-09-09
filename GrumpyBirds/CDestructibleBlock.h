@@ -1,10 +1,21 @@
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+// (c) 2021 Media Design School
+//
+// File Name   : CDestructableBlock.h
+// Description : Destructable block class
+// Authors     : Nerys Thamm
+// Mail        : nerysthamm@gmail.com
+
 #ifndef C_DESTRUCTIBLE_BLOCK_H
 #define C_DESTRUCTIBLE_BLOCK_H
 #include "CBody.h"
 #include "utility.h"
 
 /// <summary>
-/// Destructable blocks class
+/// Destructable blocks class, blocks hit by birds or damaged will break
 /// <para>Author: Nerys</para>
 /// </summary>
 class CDestructibleBlock : public CBody

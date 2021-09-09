@@ -1,3 +1,14 @@
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+// (c) 2021 Media Design School
+//
+// File Name   : CPig.h
+// Description : Pigs class, can be killed for points
+// Authors     : Nerys Thamm
+// Mail        : nerysthamm@gmail.com
+
 #ifndef EF578FE2_D943_4A98_9C9B_E95C9756B9E9
 #define EF578FE2_D943_4A98_9C9B_E95C9756B9E9
 #include "CBody.h"
