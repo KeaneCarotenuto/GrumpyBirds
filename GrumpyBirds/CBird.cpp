@@ -1,6 +1,8 @@
 #include "CBird.h"
 
 #include"CCollision.h"
+#include "CDestructibleBlock.h"
+#include"CGame.h"
 
 /// <summary>
 /// Basic Bird Constructor
@@ -193,6 +195,30 @@ void CBird::PullBack()
 
 	//set bird to pos of aim vec
 	m_body->SetTransform(util::V(m_shootPos - aimVector), m_body->GetAngle());
+
+	sf::Vector2f shootVel = util::V(CalcShootVel());
+
+	//The "distance" that the dots will display in seconds
+	float dotTime = 0.75f;
+
+	//Caluclate the aim dots
+	for (int i = 0; i < 20; i++)
+	{
+		float h = util::V(GetBody()->GetPosition()).y;
+		float r = util::V(GetBody()->GetPosition()).x;
+		float vy = shootVel.y;
+		float vx = shootVel.x;
+		float t = dotTime * (i / 20.0f);
+		float g = -util::V(m_world->GetGravity()).y;
+
+		sf::Vector2f pos(vx * t + r, h + vy * t - g * ((pow(t, 2.0f)) / (2.0f)));
+
+		sf::CircleShape* circ = new sf::CircleShape((1.0f - t/dotTime) * 5);
+		circ->setPosition(util::WorldToScreen(pos));
+		circ->setOrigin(circ->getLocalBounds().width / 2.0f, circ->getLocalBounds().height / 2.0f);
+		CGame::GetInstance()->DrawTempItem(circ);
+		circ = nullptr;
+	}
 }
 
 /// <summary>
@@ -202,14 +228,25 @@ void CBird::PullBack()
 void CBird::TryShoot()
 {
 	SetState(BirdState::Moving);
-	b2Vec2 newVel = m_shootMulti * (util::V(m_shootPos) - m_body->GetPosition());
-
-	if (util::Mag(newVel) >= m_maxShootSpeed) {
-		newVel = m_maxShootSpeed * util::Normalize(newVel);
-	}
+	b2Vec2 newVel = CalcShootVel();
 
 	m_body->SetLinearVelocity(newVel);
 	std::cout << "\nShoot Vel: " << m_body->GetLinearVelocity().Length() << "\n\n";
+}
+
+/// <summary>
+/// Calculates the shoot velocity based on relative position to slingshot
+/// <para>Author: Keane</para>
+/// </summary>
+b2Vec2 CBird::CalcShootVel()
+{
+	b2Vec2 vel = m_shootMulti* (util::V(m_shootPos) - m_body->GetPosition());
+
+	if (util::Mag(vel) >= m_maxShootSpeed) {
+		vel = m_maxShootSpeed * util::Normalize(vel);
+	}
+
+	return vel;
 }
 
 /// <summary>

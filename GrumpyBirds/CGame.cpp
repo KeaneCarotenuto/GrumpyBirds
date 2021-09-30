@@ -204,3 +204,18 @@ void CGame::FixedUpdate()
 
 	if (m_world) m_world->Step((float)timeStep, velocityIterations, positionIterations);
 }
+
+/// <summary>
+/// Draws any temporary objects, then deletes them
+/// <para>Author: Keane</para>
+/// </summary>
+void CGame::DrawAllTemps()
+{
+	if (!m_window) return;
+
+	for (sf::Drawable* _drawable : m_toDraw) {
+		m_window->draw(*_drawable);
+		delete _drawable;
+	}
+	m_toDraw.clear();
+}

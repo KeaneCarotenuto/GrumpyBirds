@@ -59,7 +59,7 @@ public:
 	CBody(b2World* _world, sf::Vector2f _position, sf::Vector2f _size, b2BodyType _type, std::string _imgName);
 	CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName);
 
-	void Destroy();
+	void Destroy(double _delay = 0.0);
 	bool IsDeleting() { return m_markedForDelete; };
 
 	void Draw();
@@ -75,6 +75,7 @@ public:
 protected:
 	//DO NOT CALL THIS, use .Destroy() INSTEAD!
 	virtual ~CBody();
+	
 
 	static sf::RenderWindow* m_window;
 	static std::vector<CBody*> m_allBodies;
@@ -94,6 +95,10 @@ protected:
 	b2FixtureDef* m_fixture;
 
 	bool m_markedForDelete = false;
+
+
+	double m_deleteCallTime = 0.0;
+	double m_deleteDelay = 0.0;
 };
 
 #endif

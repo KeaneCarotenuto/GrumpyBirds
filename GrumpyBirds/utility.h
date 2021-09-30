@@ -13,6 +13,8 @@
 #define UTILITY_H
 #include "SFML/Graphics.hpp"
 #include "box2d/box2d.h"
+#include <chrono>
+#include <iostream>
 
 #define SCALE (float)30.0f
 
@@ -22,6 +24,7 @@
 /// </summary>
 namespace util {
 	extern sf::RenderWindow* window;
+	
 
 	static b2Vec2 V(sf::Vector2f _a) {
 		return { _a.x / SCALE, _a.y / SCALE };
@@ -33,6 +36,10 @@ namespace util {
 
 	static sf::Vector2f WorldToScreen(b2Vec2 _a) {
 		return { _a.x * SCALE, window->getSize().y - _a.y * SCALE };
+	}
+
+	static sf::Vector2f WorldToScreen(sf::Vector2f _a) {
+		return { _a.x, window->getSize().y - _a.y };
 	}
 
 	static b2Vec2 ScreenToWorld(sf::Vector2f _a) {
@@ -62,6 +69,12 @@ namespace util {
 
 	static b2Vec2 Normalize(b2Vec2 _a) {
 		return ((1.0f / Mag(_a)) * _a);
+	}
+
+	static double GetSecondsPast() {
+		double test = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+
+		return  test / 1000.0;
 	}
 }
 #endif

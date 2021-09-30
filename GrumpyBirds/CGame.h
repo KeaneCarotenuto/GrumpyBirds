@@ -46,6 +46,15 @@ public:
 	void Clear();
 	void FixedUpdate();
 
+	/// <summary>
+	/// Assigns object to be drawn this frame, then deleted immediately.
+	/// <para>Author: Keane</para>
+	/// </summary>
+	/// <param name="_item"></param>
+	void DrawTempItem(sf::Drawable* _item) { if(_item) m_toDraw.push_back(_item); };
+
+	void DrawAllTemps();
+
 	b2World* GetWorld() { return m_world; };
 
 private:
@@ -62,6 +71,8 @@ private:
 	std::vector<CPig*> m_allPigs;
 	std::vector<CDestructibleBlock*> m_allBlocks;
 	std::vector<CBody*> m_allGround;
+
+	std::vector<sf::Drawable*> m_toDraw;
 
 	CBird* m_currentShooter = nullptr;
 

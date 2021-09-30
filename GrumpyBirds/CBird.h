@@ -58,6 +58,8 @@ private:
 
 	void TryShoot();
 
+	b2Vec2 CalcShootVel();
+
 	BirdType m_type = BirdType::Regular;
 	BirdState m_state = BirdState::Waiting;
 

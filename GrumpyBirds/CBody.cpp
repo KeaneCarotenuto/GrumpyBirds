@@ -16,7 +16,8 @@ void CBody::TryDestroys()
     failedDelete.clear();
 
     for (CBody* _body : m_toDelete) {
-        if (!_body->m_world->IsLocked()) {
+        double diff = util::GetSecondsPast() - _body->m_deleteCallTime;
+        if (!_body->m_world->IsLocked() && diff >= _body->m_deleteDelay) {
             std::vector<CBody*>::iterator it = std::find(m_allBodies.begin(), m_allBodies.end(), _body);
             if (it != m_allBodies.end()) {
                 m_allBodies.erase(it);
@@ -129,11 +130,14 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType 
 /// Use this instead of delete
 /// <para>Author: Keane</para>
 /// </summary>
-void CBody::Destroy()
+void CBody::Destroy(double _delay)
 {
     std::cout << "-Destroy body\n";
 
     m_markedForDelete = true;
+
+    m_deleteCallTime = util::GetSecondsPast();
+    m_deleteDelay = _delay;
 
     std::vector<CBody*>::iterator it = std::find(m_toDelete.begin(), m_toDelete.end(), this);
     if (it == m_toDelete.end()) {

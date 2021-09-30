@@ -13,7 +13,6 @@
 #include "SFML/System.hpp"
 #include "SFML/Window.hpp"
 #include "box2d/box2d.h"
-#include <iostream>
 
 #include "CResourceManager.h"
 #include "CBody.h"
@@ -53,6 +52,7 @@ int main()
     CBody::SetWindow(window);
 	game->SetWindow(window);
 	util::window = window;
+	std::vector<sf::Drawable*> toDraw = {};
 
 	CResourceManager::LoadImage("Rect.png");
 	CResourceManager::LoadImage("Circle.png");
@@ -100,9 +100,6 @@ int main()
 			drawn = false;
 		}
 
-		if (!CBody::GetToDelete().empty()) CGame::GetInstance()->ClearDeleted();
-		CBody::TryDestroys();
-
 		//Draws After Updates
 		if (drawn)
 		{
@@ -115,6 +112,9 @@ int main()
 
 			drawn = true;
 		}
+
+		if (!CBody::GetToDelete().empty()) CGame::GetInstance()->ClearDeleted();
+		CBody::TryDestroys();
 
 		sf::Event newEvent;
 
@@ -155,6 +155,7 @@ void Draw() {
 	for (CBody* _body : CBody::GetAllBodies()) {
 		_body->Draw();
 	}
+	game->DrawAllTemps();
 
 	window->draw(instructions);
 
