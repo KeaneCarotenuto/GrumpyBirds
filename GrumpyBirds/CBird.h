@@ -21,7 +21,8 @@
 class CBird : public CBody
 {
 public:
-	enum class BirdType {
+	enum class BirdType
+	{
 		Regular,
 		Fast,
 		Bomb,
@@ -30,14 +31,16 @@ public:
 		Dropper,
 	};
 
-	enum class BirdState {
-		Waiting,
-		Shooting,
-		Moving,
+	enum class BirdState
+	{
+		Waiting,	// Waiting to be loaded
+		Shooting,	// Being aimed
+		Moving,		// Has been shot and is moving through the air
+		Destroying, // Has hit something and is waiting to be destroyed
 		//OffScreen
 	};
 
-	CBird(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName);
+	CBird(b2World *_world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName, BirdType _birdType);
 
 	void SetState(BirdState _state);
 	BirdState GetState() { return m_state; };
@@ -63,17 +66,19 @@ private:
 	BirdType m_type = BirdType::Regular;
 	BirdState m_state = BirdState::Waiting;
 
-	sf::Vector2f m_shootPos = {0,0};
+	sf::Vector2f m_shootPos = {0, 0};
 	float m_pullBackDist = 100.0f;
 	float m_shootMulti = 10.0f;
 	float m_maxShootSpeed = 30.0f;
 
 	bool m_mouseHolding = false;
 	bool m_mouseDown = false;
-	bool releasedThisFrame = false;
+	bool m_releasedThisFrame = false;
+
+	bool m_hasUsedAbility = false;
+	float m_autoDestroyTimer = 3.0f;
 
 protected:
 	~CBird();
 };
 #endif
-
