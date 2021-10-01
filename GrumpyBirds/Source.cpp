@@ -36,6 +36,8 @@ sf::RenderWindow *util::window = nullptr;
 
 sf::Text instructions;
 
+sf::RectangleShape background;
+
 /// <summary>
 /// Setup and then running of the main loop.
 /// <para>Author: Keane</para>
@@ -63,6 +65,9 @@ int main()
 	CResourceManager::LoadImage("Pig_Regular_1.png");
 	CResourceManager::LoadImage("Block_Wood_Regular_1.png");
 	CResourceManager::LoadImage("Block_Wood_Circle_1.png");
+	CResourceManager::LoadImage("Block_Stone_Regular_1.png");
+	CResourceManager::LoadImage("Block_Stone_Circle_1.png");
+	CResourceManager::LoadImage("Background.jpg");
 
 	CResourceManager::LoadFont("angrybirds.ttf");
 
@@ -74,6 +79,10 @@ int main()
 		"Press [2] to clear the level.\n"
 		"Drag and Release the raised bird to shoot.\n"
 		"Level will clear after 5 seconds of last bird being shot.");
+	sf::Texture bgTexture;
+	bgTexture.loadFromImage(*CResourceManager::GetImage("Background.jpg"));
+	background.setTexture(&bgTexture);
+	background.setSize(sf::Vector2f(1600.0f, 930.0f));
 
 	//Start Game Scene up
 	//InitGameScene();
@@ -132,7 +141,7 @@ int main()
 			{
 				if (newEvent.key.code == sf::Keyboard::Num1)
 				{
-					game->SetLevel(CGame::Level::One);
+					game->SetLevel(CGame::Level::Two);
 				}
 				if (newEvent.key.code == sf::Keyboard::Num2)
 				{
@@ -157,7 +166,7 @@ int FixedUpdate()
 void Draw()
 {
 	window->clear();
-
+	window->draw(background);
 	for (CBody *_body : CBody::GetAllBodies())
 	{
 		_body->Draw();

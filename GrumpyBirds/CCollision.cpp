@@ -16,18 +16,18 @@ CCollision::~CCollision()
 /// <para>Secondary Author: Keane (only about 6 lines)</para>
 /// </summary>
 /// <param name="_contact"></param>
-void CCollision::BeginContact(b2Contact* _contact)
+void CCollision::BeginContact(b2Contact *_contact)
 {
-	auto bodyUserDataOne = (CBody*)_contact->GetFixtureA()->GetBody()->GetUserData().pointer;
-	auto bodyUserDataTwo = (CBody*)_contact->GetFixtureB()->GetBody()->GetUserData().pointer;
+    auto bodyUserDataOne = (CBody *)_contact->GetFixtureA()->GetBody()->GetUserData().pointer;
+    auto bodyUserDataTwo = (CBody *)_contact->GetFixtureB()->GetBody()->GetUserData().pointer;
 
     if (bodyUserDataOne && bodyUserDataTwo)
     {
-        CBody* CBodyA = bodyUserDataOne;
-        CBody* CBodyB = bodyUserDataTwo;
+        CBody *CBodyA = bodyUserDataOne;
+        CBody *CBodyB = bodyUserDataTwo;
 
-        b2Body* bodyA = CBodyA->GetBody();
-        b2Body* bodyB = CBodyB->GetBody();
+        b2Body *bodyA = CBodyA->GetBody();
+        b2Body *bodyB = CBodyB->GetBody();
 
         CollisionData aData, bData;
         aData.ObjName = CBodyA->GetName();
@@ -44,6 +44,15 @@ void CCollision::BeginContact(b2Contact* _contact)
         aData.Velocity = bodyA->GetLinearVelocity();
         bData.Velocity = bodyB->GetLinearVelocity();
 
+        aData.VelocityDelta = bodyA->GetLinearVelocity() - bodyB->GetLinearVelocity();
+        bData.VelocityDelta = bodyB->GetLinearVelocity() - bodyA->GetLinearVelocity();
+
+        b2Vec2 aMomentum, bMomentum;
+        aMomentum.Set(bodyA->GetLinearVelocity().x * bodyA->GetMass(), bodyA->GetLinearVelocity().y * bodyA->GetMass());
+        bMomentum.Set(bodyB->GetLinearVelocity().x * bodyB->GetMass(), bodyB->GetLinearVelocity().y * bodyB->GetMass());
+        aData.Momentum = aMomentum;
+        bData.Momentum = bMomentum;
+
         aData.ObjMass = bodyA->GetMass();
         bData.ObjMass = bodyB->GetMass();
 
@@ -52,6 +61,6 @@ void CCollision::BeginContact(b2Contact* _contact)
     }
 }
 
-void CCollision::EndContact(b2Contact* _contact)
+void CCollision::EndContact(b2Contact *_contact)
 {
 }

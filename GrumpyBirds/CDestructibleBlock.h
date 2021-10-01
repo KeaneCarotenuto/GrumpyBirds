@@ -21,9 +21,13 @@
 class CDestructibleBlock : public CBody
 {
 public:
-
-	CDestructibleBlock(b2World *_world, sf::Vector2f _position, sf::Vector2f _size, b2BodyType _type, std::string _imgName);
-	CDestructibleBlock(b2World *_world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName);
+	enum class BlockType
+	{
+		WOOD,
+		STONE,
+	};
+	CDestructibleBlock(b2World *_world, sf::Vector2f _position, sf::Vector2f _size, b2BodyType _type, std::string _imgName, BlockType _blockType);
+	CDestructibleBlock(b2World *_world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName, BlockType _blockType);
 
 	void Destroy();
 
@@ -34,6 +38,8 @@ public:
 
 protected:
 	~CDestructibleBlock();
+private:
+	BlockType m_type;
 };
 
 #endif 

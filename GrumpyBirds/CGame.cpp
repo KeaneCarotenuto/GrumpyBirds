@@ -44,6 +44,79 @@ void CGame::SetLevel(Level _newLevel)
 	Init();
 }
 
+void CGame::PlaceLevel(char _arr[][20])
+{
+	float heightmult = 50.0f;
+	float widthmult = 50.0f;
+
+	for (int i = 0; i < 17; i++)
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			CDestructibleBlock *block;
+			CPig *pig;
+			switch (_arr[i][j])
+			{
+			case 'B':
+				block = new CDestructibleBlock(m_world, {(j+10) * widthmult, 825.0f - (i * heightmult)}, {50, 50}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+				m_allBlocks.push_back(block);
+				break;
+			case '|':
+				block = new CDestructibleBlock(m_world, {((j+10) * widthmult), 825.0f - (i * heightmult)}, {20, 50}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+				m_allBlocks.push_back(block);
+				break;
+			case '=':
+				block = new CDestructibleBlock(m_world, {(j+10) * widthmult, 825.0f - ((i * heightmult))}, {150, 15}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+				m_allBlocks.push_back(block);
+				break;
+			case 'O':
+				block = new CDestructibleBlock(m_world, {(j+10) * widthmult, 825.0f - (i * heightmult)}, 40, b2_dynamicBody, "Block_Stone_Circle_1.png", CDestructibleBlock::BlockType::STONE);
+				m_allBlocks.push_back(block);
+				break;
+			case 'P':
+				pig = new CPig(m_world, {(j+10) * widthmult, 825.0f - (i * heightmult)}, 25, b2_dynamicBody, "Pig_Regular_1.png");
+				m_allPigs.push_back(pig);
+				break;
+			case '{':
+				block = new CDestructibleBlock(m_world, {((j+10) * widthmult) - 10.0f, 825.0f - (i * heightmult)}, {20, 50}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+				m_allBlocks.push_back(block);
+				break;
+			case '}':
+				block = new CDestructibleBlock(m_world, {((j+10) * widthmult) + 10.0f, 825.0f - (i * heightmult)}, {20, 50}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+				m_allBlocks.push_back(block);
+				break;
+			case 'b':
+				block = new CDestructibleBlock(m_world, {(j+10) * widthmult, 825.0f - (i * heightmult)}, {50, 50}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
+				m_allBlocks.push_back(block);
+				break;
+			case 'l':
+				block = new CDestructibleBlock(m_world, {((j+10) * widthmult), 825.0f - (i * heightmult)}, {20, 50}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
+				m_allBlocks.push_back(block);
+				break;
+			case '_':
+				block = new CDestructibleBlock(m_world, {(j+10) * widthmult, 825.0f - ((i * heightmult))}, {150, 15}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
+				m_allBlocks.push_back(block);
+				break;
+			case 'o':
+				block = new CDestructibleBlock(m_world, {(j+10) * widthmult, 825.0f - (i * heightmult)}, 40, b2_dynamicBody, "Block_Wood_Circle_1.png", CDestructibleBlock::BlockType::WOOD);
+				m_allBlocks.push_back(block);
+				break;
+			case '[':
+				block = new CDestructibleBlock(m_world, {((j+10) * widthmult) - 10.0f, 825.0f - (i * heightmult)}, {20, 50}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
+				m_allBlocks.push_back(block);
+				break;
+			case ']':
+				block = new CDestructibleBlock(m_world, {((j+10) * widthmult) + 10.0f, 825.0f - (i * heightmult)}, {20, 50}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
+				m_allBlocks.push_back(block);
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+}
+
 /// <summary>
 /// Initialises level when changing
 /// <para>Author: Keane</para>
@@ -71,19 +144,44 @@ void CGame::Init()
 		m_allBirds.push_back(bird2);
 		bird2->SetShootPos(shootPos);
 
-		CPig *pig1 = new CPig(m_world, {800, 500}, 25, b2_dynamicBody, "Pig_Regular_1.png");
-		m_allPigs.push_back(pig1);
+		
 
-		CDestructibleBlock *anchor = new CDestructibleBlock(m_world, {800, 400}, {10, 10}, b2_staticBody, "Block_Wood_Regular_1.png");
+		CDestructibleBlock *anchor = new CDestructibleBlock(m_world, {900, 650}, {10, 10}, b2_staticBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
 		m_allBlocks.push_back(anchor);
-		CDestructibleBlock *rectBody = new CDestructibleBlock(m_world, {800, 800}, {100, 20}, b2_dynamicBody, "Block_Wood_Regular_1.png");
+		CDestructibleBlock *rectBody = new CDestructibleBlock(m_world, {1100, 650}, {200, 10}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+		rectBody->GetBody()->GetFixtureList()[0].SetDensity(0.1f);
+		rectBody->GetBody()->ResetMassData();
 		m_allBlocks.push_back(rectBody);
-		CDestructibleBlock *rectBody2 = new CDestructibleBlock(m_world, {800, 800}, {100, 20}, b2_dynamicBody, "Block_Wood_Regular_1.png");
+		CDestructibleBlock *rectBody2 = new CDestructibleBlock(m_world, {1300, 650}, {200, 10}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+		rectBody2->GetBody()->GetFixtureList()[0].SetDensity(0.1f);
+		rectBody2->GetBody()->ResetMassData();
 		m_allBlocks.push_back(rectBody2);
-		CDestructibleBlock *rectBody3 = new CDestructibleBlock(m_world, {800, 800}, {100, 20}, b2_dynamicBody, "Block_Wood_Regular_1.png");
+		CDestructibleBlock *rectBody3 = new CDestructibleBlock(m_world, {1500, 650}, {200, 10}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+		rectBody3->GetBody()->GetFixtureList()[0].SetDensity(0.1f);
+		rectBody3->GetBody()->ResetMassData();
 		m_allBlocks.push_back(rectBody3);
-		CDestructibleBlock *circleBody = new CDestructibleBlock(m_world, {800, 700}, 40, b2_dynamicBody, "Block_Wood_Circle_1.png");
+		CDestructibleBlock *circleBody = new CDestructibleBlock(m_world, {1700, 650}, 40, b2_dynamicBody, "Block_Stone_Circle_1.png", CDestructibleBlock::BlockType::STONE);
 		m_allBlocks.push_back(circleBody);
+		
+		char level[17][20] = {
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '_', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ']', ' ', '['}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ']', ' ', '['}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ']', ' ', '['}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '_', ' '}, 
+			{' ', ' ', ' ', ' ', 'P', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '[', ' ', ']'}, 
+			{' ', ' ', ' ', ' ', '_', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '[', ' ', ']'}, 
+			{' ', ' ', ' ', '{', ' ', ']', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '[', ' ', ']'}, 
+			{' ', ' ', ' ', '{', ' ', ']', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '[', ' ', ']'}, 
+			{' ', ' ', ' ', '{', ' ', ']', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'P', ' ', ' ', ' ', 'B', ' ', 'B'}, 
+			{' ', ' ', ' ', '{', 'P', ']', ' ', ' ', ' ', ' ', ' ', 'P', ' ', 'l', ' ', ' ', ' ', 'B', ' ', 'B'}, 
+			{' ', ' ', ' ', '{', 'l', ']', ' ', ' ', ' ', ' ', ' ', 'l', ' ', 'l', ' ', ' ', ' ', 'B', 'B', 'B'}};
+		PlaceLevel(level);
 
 		b2RevoluteJointDef revoluteJointDef1;
 		revoluteJointDef1.bodyA = anchor->GetBody();
@@ -97,23 +195,23 @@ void CGame::Init()
 		revoluteJointDef2.bodyA = rectBody->GetBody();
 		revoluteJointDef2.bodyB = rectBody2->GetBody();
 		revoluteJointDef2.collideConnected = false;
-		revoluteJointDef2.localAnchorA.Set(-50 / SCALE, 0 / SCALE);
-		revoluteJointDef2.localAnchorB.Set(50 / SCALE, 0 / SCALE);
+		revoluteJointDef2.localAnchorA.Set(-100 / SCALE, 0 / SCALE);
+		revoluteJointDef2.localAnchorB.Set(100 / SCALE, 0 / SCALE);
 		m_world->CreateJoint(&revoluteJointDef2);
 
 		b2RevoluteJointDef revoluteJointDef3;
 		revoluteJointDef3.bodyA = rectBody2->GetBody();
 		revoluteJointDef3.bodyB = rectBody3->GetBody();
 		revoluteJointDef3.collideConnected = false;
-		revoluteJointDef3.localAnchorA.Set(-50 / SCALE, 0 / SCALE);
-		revoluteJointDef3.localAnchorB.Set(50 / SCALE, 0 / SCALE);
+		revoluteJointDef3.localAnchorA.Set(-100 / SCALE, 0 / SCALE);
+		revoluteJointDef3.localAnchorB.Set(100 / SCALE, 0 / SCALE);
 		m_world->CreateJoint(&revoluteJointDef3);
 
-		b2RevoluteJointDef revoluteJointDef4;
+		b2WeldJointDef revoluteJointDef4;
 		revoluteJointDef4.bodyA = rectBody3->GetBody();
 		revoluteJointDef4.bodyB = circleBody->GetBody();
 		revoluteJointDef4.collideConnected = false;
-		revoluteJointDef4.localAnchorA.Set(-50 / SCALE, 0 / SCALE);
+		revoluteJointDef4.localAnchorA.Set(-100 / SCALE, 0 / SCALE);
 		revoluteJointDef4.localAnchorB.Set(0, 0);
 		m_world->CreateJoint(&revoluteJointDef4);
 
@@ -135,13 +233,110 @@ void CGame::Init()
 	case Level::Two:
 	{
 
-		CBird *circleBody = new CBird(m_world, {426, 800}, 25, b2_dynamicBody, "Circle.png", CBird::BirdType::Fast);
-		m_allBirds.push_back(circleBody);
-		//CBody* squareBody = new CBody(m_world, { 200,300 }, { 50,50 }, b2_dynamicBody, "Rect.png");						m_allBlocks.push_back(squareBody);
+		sf::Vector2f shootPos = {200, 100};
 
-		CBody *myGround = new CBody(m_world, {400, 100}, {750, 100}, b2_staticBody, "Rect.png");
+		CBird *bird1 = new CBird(m_world, {100, 35}, 25, b2_dynamicBody, "Bird_Fast_1.png", CBird::BirdType::Fast);
+		m_allBirds.push_back(bird1);
+		bird1->SetShootPos(shootPos);
+
+		CBird *bird2 = new CBird(m_world, {50, 35}, 25, b2_dynamicBody, "Bird_Regular_1.png", CBird::BirdType::Regular);
+		m_allBirds.push_back(bird2);
+		bird2->SetShootPos(shootPos);
+
+		
+
+		CDestructibleBlock *anchor = new CDestructibleBlock(m_world, {750, 183}, {10, 10}, b2_staticBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+		m_allBlocks.push_back(anchor);
+		CDestructibleBlock *rectBody = new CDestructibleBlock(m_world, {600, 183}, {200, 50}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+		m_allBlocks.push_back(rectBody);
+		rectBody->GetBody()->SetGravityScale(15.0f);
+		
+		CDestructibleBlock *anchor2 = new CDestructibleBlock(m_world, {1200, 25}, {10, 10}, b2_staticBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+		m_allBlocks.push_back(anchor);
+		CDestructibleBlock *rectBody2 = new CDestructibleBlock(m_world, {1300, 25}, {300, 30}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+		m_allBlocks.push_back(rectBody2);
+		CDestructibleBlock *rectBody3 = new CDestructibleBlock(m_world, {1450, 25}, {20, 30}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+		m_allBlocks.push_back(rectBody3);
+		CDestructibleBlock *rectBody4 = new CDestructibleBlock(m_world, {1500, 25}, {20, 30}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+		m_allBlocks.push_back(rectBody4);
+		
+		
+		
+		char level[17][20] = {
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|', ' ', ' ', '|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', '{', 'B', 'P', 'P', 'B', '}', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', '|', ' ', ' ', ' ', ' ', ' ', '=', ' ', ' ', '=', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', 'B', ' ', ' ', ' ', ' ', ' ', 'B', ' ', ' ', 'B', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', 'B', 'P', ' ', ' ', ' ', ' ', 'B', ' ', ' ', 'B', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', '_', ' ', ' ', ' ', ' ', 'B', ' ', ' ', 'B', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', '{', 'B', 'P', ' ', 'B', '}', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '_', ' ', ' ', '_', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', 'l', ' ', ' ', '{', ' ', '{', ' ', '}', '{', ' ', '}', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', 'l', 'P', ' ', '{', ' ', '{', ' ', '}', '{', ' ', '}', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', 'l', '|', ' ', '{', ' ', 'B', 'B', 'B', 'B', 'B', 'B', ' ', ' ', ' ', ' ', ' ', ' ', 'O'}};
+		PlaceLevel(level);
+
+		b2RevoluteJointDef revoluteJointDef1;
+		revoluteJointDef1.bodyA = anchor->GetBody();
+		revoluteJointDef1.bodyB = rectBody->GetBody();
+		revoluteJointDef1.collideConnected = false;
+		revoluteJointDef1.localAnchorA.Set(0, 0);
+		revoluteJointDef1.localAnchorB.Set(100 / SCALE, 0 / SCALE);
+		b2Joint* revJoint1 = m_world->CreateJoint(&revoluteJointDef1);
+
+		b2RevoluteJointDef revoluteJointDef2;
+		revoluteJointDef2.bodyA = anchor2->GetBody();
+		revoluteJointDef2.bodyB = rectBody2->GetBody();
+		revoluteJointDef2.collideConnected = false;
+		revoluteJointDef2.localAnchorA.Set(0,0);
+		revoluteJointDef2.localAnchorB.Set(-150 / SCALE, 0 / SCALE);
+		b2Joint* revJoint2 = m_world->CreateJoint(&revoluteJointDef2);
+
+		b2WeldJointDef weldJointDef1;
+		weldJointDef1.bodyA = rectBody2->GetBody();
+		weldJointDef1.bodyB = rectBody3->GetBody();
+		weldJointDef1.collideConnected = false;
+		weldJointDef1.localAnchorA.Set(0 / SCALE, 10 / SCALE);
+		weldJointDef1.localAnchorB.Set(-50 / SCALE, -15 / SCALE);
+		m_world->CreateJoint(&weldJointDef1);
+
+		b2WeldJointDef weldJointDef2;
+		weldJointDef2.bodyA = rectBody2->GetBody();
+		weldJointDef2.bodyB = rectBody4->GetBody();
+		weldJointDef2.collideConnected = false;
+		weldJointDef2.localAnchorA.Set(0 / SCALE, 10 / SCALE);
+		weldJointDef2.localAnchorB.Set(-150 / SCALE, -15 / SCALE);
+		m_world->CreateJoint(&weldJointDef2);
+
+		b2GearJointDef gearJointDef;
+		gearJointDef.bodyA = rectBody->GetBody();
+		gearJointDef.bodyB = rectBody2->GetBody();
+		gearJointDef.joint1 = revJoint1;
+		gearJointDef.joint2 = revJoint2;
+		gearJointDef.ratio = -0.5f;
+		m_world->CreateJoint(&gearJointDef);
+
+
+		
+
+		CBody *myGround = new CBody(m_world, {800, -100}, {1600, 215}, b2_staticBody, "ground.png");
 		m_allGround.push_back(myGround);
-		myGround->GETBODY_TODELETE()->SetTransform(myGround->GETBODY_TODELETE()->GetPosition(), 10 * ((float)M_PI / 180.0f));
+		CBody *myGrass = new CBody(m_world, {800, 15}, {1600, 28}, b2_staticBody, "grass.png");
+		m_allGround.push_back(myGrass);
+		myGrass->GetBody()->GetFixtureList()->SetSensor(true);
+
+		CBody *slingImg = new CBody(m_world, shootPos, {10, 10}, b2_staticBody, "Circle.png");
+		m_allGround.push_back(slingImg);
+		slingImg->GetBody()->GetFixtureList()->SetSensor(true);
+
+		FindNewShooter();
+
 		break;
 	}
 

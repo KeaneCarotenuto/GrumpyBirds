@@ -28,15 +28,16 @@
 class CGame
 {
 public:
-	enum class Level {
+	enum class Level
+	{
 		One = 1,
 		Two
 	};
 
-	static CGame* GetInstance();
+	static CGame *GetInstance();
 
-	void SetWindow(sf::RenderWindow* _wind) { m_window = _wind; };
-	sf::RenderWindow* GetWindow() { return m_window; };
+	void SetWindow(sf::RenderWindow *_wind) { m_window = _wind; };
+	sf::RenderWindow *GetWindow() { return m_window; };
 
 	void SetLevel(Level _newLevel);
 
@@ -51,30 +52,36 @@ public:
 	/// <para>Author: Keane</para>
 	/// </summary>
 	/// <param name="_item"></param>
-	void DrawTempItem(sf::Drawable* _item) { if(_item) m_toDraw.push_back(_item); };
+	void DrawTempItem(sf::Drawable *_item)
+	{
+		if (_item)
+			m_toDraw.push_back(_item);
+	};
 
 	void DrawAllTemps();
 
-	b2World* GetWorld() { return m_world; };
+	b2World *GetWorld() { return m_world; };
 
 private:
 	CGame();
 	~CGame();
 
-	static CGame* m_instance;
+	void PlaceLevel(char _arr[][20]);
 
-	sf::RenderWindow* m_window = nullptr;
+	static CGame *m_instance;
+
+	sf::RenderWindow *m_window = nullptr;
 
 	CGame::Level m_currentLevel = Level::One;
 
-	std::vector<CBird*> m_allBirds;
-	std::vector<CPig*> m_allPigs;
-	std::vector<CDestructibleBlock*> m_allBlocks;
-	std::vector<CBody*> m_allGround;
+	std::vector<CBird *> m_allBirds;
+	std::vector<CPig *> m_allPigs;
+	std::vector<CDestructibleBlock *> m_allBlocks;
+	std::vector<CBody *> m_allGround;
 
-	std::vector<sf::Drawable*> m_toDraw;
+	std::vector<sf::Drawable *> m_toDraw;
 
-	CBird* m_currentShooter = nullptr;
+	CBird *m_currentShooter = nullptr;
 
 	sf::Clock m_gameClock;
 	float m_timeout = 0;
@@ -82,7 +89,7 @@ private:
 
 	CCollision m_collisionDetector;
 
-	b2World* m_world = nullptr;
+	b2World *m_world = nullptr;
 
 	double timeStep = (1.0f / 60.0f);
 	int32 velocityIterations = 8;

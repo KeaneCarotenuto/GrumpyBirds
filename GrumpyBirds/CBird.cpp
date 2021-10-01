@@ -120,7 +120,7 @@ void CBird::OnCollisionEnter(CollisionData _data)
 {
 	if (m_state == CBird::BirdState::Moving)
 	{
-		m_state == CBird::BirdState::Destroying;
+		SetState(CBird::BirdState::Destroying);
 	}
 	if (_data.other->GetBody()->GetFixtureList()->IsSensor())
 		return;
