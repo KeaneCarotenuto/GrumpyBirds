@@ -62,6 +62,8 @@ int main()
 	CResourceManager::LoadImage("grass.png");
 	CResourceManager::LoadImage("Bird_Regular_1.png");
 	CResourceManager::LoadImage("Bird_Fast_1.png");
+	CResourceManager::LoadImage("Bird_Dropper_1.png");
+	CResourceManager::LoadImage("Bird_Egg_1.png");
 	CResourceManager::LoadImage("Pig_Regular_1.png");
 	CResourceManager::LoadImage("Block_Wood_Regular_1.png");
 	CResourceManager::LoadImage("Block_Wood_Circle_1.png");

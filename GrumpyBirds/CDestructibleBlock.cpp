@@ -1,5 +1,6 @@
 #include "CDestructibleBlock.h"
 #include "CCollision.h"
+#include "CBird.h"
 
 CDestructibleBlock::CDestructibleBlock(b2World *_world, sf::Vector2f _position, sf::Vector2f _size, b2BodyType _type, std::string _imgName, BlockType _blockType) : CBody(_world, _position, _size, _type, _imgName)
 {
@@ -30,6 +31,8 @@ void CDestructibleBlock::Destroy()
 
 void CDestructibleBlock::OnCollisionEnter(CollisionData _data)
 {
+    if (dynamic_cast<CBird*>(_data.other) == nullptr) return;
+
     std::cout << "Block col\n";
 
     if ((_data.Momentum.Length() > 38.0f && m_type == BlockType::WOOD))

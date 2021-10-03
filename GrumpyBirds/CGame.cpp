@@ -143,7 +143,7 @@ void CGame::Init()
 	case Level::One:
 	{
 
-		sf::Vector2f shootPos = {200, 100};
+		sf::Vector2f shootPos = {200, 200};
 
 		CBird *bird1 = new CBird(m_world, {100, 35}, 25, b2_dynamicBody, "Bird_Fast_1.png", CBird::BirdType::Fast);
 		m_allBirds.push_back(bird1);
@@ -242,13 +242,13 @@ void CGame::Init()
 	case Level::Two:
 	{
 
-		sf::Vector2f shootPos = {200, 100};
+		sf::Vector2f shootPos = {200, 200};
 
 		CBird *bird1 = new CBird(m_world, {100, 35}, 25, b2_dynamicBody, "Bird_Fast_1.png", CBird::BirdType::Fast);
 		m_allBirds.push_back(bird1);
 		bird1->SetShootPos(shootPos);
 
-		CBird *bird2 = new CBird(m_world, {50, 35}, 25, b2_dynamicBody, "Bird_Regular_1.png", CBird::BirdType::Regular);
+		CBird *bird2 = new CBird(m_world, {50, 35}, 25, b2_dynamicBody, "Bird_Dropper_1.png", CBird::BirdType::Dropper);
 		m_allBirds.push_back(bird2);
 		bird2->SetShootPos(shootPos);
 
@@ -400,24 +400,35 @@ void CGame::Clear()
 
 	for (CBird *_body : m_allBirds)
 	{
+		_body->GetBody()->GetFixtureList()->SetSensor(true);
+
 		if (_body)
 			_body->Destroy();
 	};
 	m_allBirds.clear();
+
 	for (CPig *_body : m_allPigs)
 	{
+		_body->GetBody()->GetFixtureList()->SetSensor(true);
+
 		if (_body)
 			_body->Destroy();
 	};
 	m_allPigs.clear();
+
 	for (CDestructibleBlock *_body : m_allBlocks)
 	{
+		_body->GetBody()->GetFixtureList()->SetSensor(true);
+
 		if (_body)
 			_body->Destroy();
 	};
 	m_allBlocks.clear();
+
 	for (CBody *_body : m_allGround)
 	{
+		_body->GetBody()->GetFixtureList()->SetSensor(true);
+
 		if (_body)
 			_body->Destroy();
 	};

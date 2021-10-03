@@ -35,22 +35,23 @@ void CBird::SetState(BirdState _state)
 	switch (m_state)
 	{
 	case CBird::BirdState::Waiting:
-		m_body->SetType(b2BodyType::b2_staticBody);
+		if (m_body->GetType() != b2BodyType::b2_staticBody) m_body->SetType(b2BodyType::b2_staticBody);
 		m_body->GetFixtureList()->SetSensor(true);
 		break;
 
 	case CBird::BirdState::Shooting:
-		m_body->SetType(b2BodyType::b2_kinematicBody);
+		if (m_body->GetType() != b2BodyType::b2_kinematicBody) m_body->SetType(b2BodyType::b2_kinematicBody);
 		m_body->GetFixtureList()->SetSensor(true);
 		break;
 
 	case CBird::BirdState::Moving:
-		m_body->SetType(b2BodyType::b2_dynamicBody);
+		if (m_body->GetType() != b2BodyType::b2_dynamicBody) m_body->SetType(b2BodyType::b2_dynamicBody);
 		m_body->GetFixtureList()->SetSensor(false);
 		break;
 
 	case CBird::BirdState::Destroying:
-
+		if (m_body->GetType() != b2BodyType::b2_dynamicBody) m_body->SetType(b2BodyType::b2_dynamicBody);
+		m_body->GetFixtureList()->SetSensor(false);
 		break;
 
 		/*case CBird::BirdState::OffScreen:
@@ -156,9 +157,21 @@ void CBird::DoMoving()
 			vel.y = m_body->GetLinearVelocity().y * 2.0f;
 			m_body->SetLinearVelocity(vel);
 			break;
-		case CBird::BirdType::Bomb:
-			
+
+		//--Keane
+		case CBird::BirdType::Dropper: {
+			CBird* egg = new CBird(m_world, util::V(GetBody()->GetPosition()) - sf::Vector2f(0, 30), 15, b2_dynamicBody, "Bird_Egg_1.png", CBird::BirdType::Dropper);
+			egg->SetState(CBird::BirdState::Destroying);
+			egg->m_name = "EGG";
+			egg->GetBody()->SetLinearVelocity({ 0, -20.0f });
+			egg->GetBody()->GetFixtureList()->SetDensity(egg->GetBody()->GetFixtureList()->GetDensity() * 2.0f);
+			egg->GetBody()->ResetMassData();
+			CGame::GetInstance()->AddBird(egg);
+
 			break;
+		}
+		//--Keane
+
 		default:
 			//If behaviour has not been coded yet or there is no behaviour for this bird
 			break;
