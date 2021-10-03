@@ -46,6 +46,8 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, sf::Vector2f _size, b2Body
 {
     m_world = _world;
 
+    m_name = "BODY";
+
 	m_sprite = new sf::Sprite();
     (m_sprite)->setPosition(_position);
     m_texture = new sf::Texture();
@@ -92,6 +94,8 @@ CBody::CBody(b2World* _world, sf::Vector2f _position, sf::Vector2f _size, b2Body
 CBody::CBody(b2World* _world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName)
 {
     m_world = _world;
+
+    m_name = "BIRD";
 
     m_sprite = new sf::Sprite();
     (m_sprite)->setPosition(_position);

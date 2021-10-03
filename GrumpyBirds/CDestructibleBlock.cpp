@@ -5,12 +5,16 @@ CDestructibleBlock::CDestructibleBlock(b2World *_world, sf::Vector2f _position, 
 {
     m_body->GetUserData().pointer = (uintptr_t)(this);
     m_type = _blockType;
+
+    m_name = "BLOCK";
 }
 
 CDestructibleBlock::CDestructibleBlock(b2World *_world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName, BlockType _blockType) : CBody(_world, _position, _radius, _type, _imgName)
 {
     m_body->GetUserData().pointer = (uintptr_t)(this);
     m_type = _blockType;
+
+    m_name = "BLOCK";
 }
 
 void CDestructibleBlock::FixedUpdate()

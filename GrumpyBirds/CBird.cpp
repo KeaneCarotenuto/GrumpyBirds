@@ -49,6 +49,10 @@ void CBird::SetState(BirdState _state)
 		m_body->GetFixtureList()->SetSensor(false);
 		break;
 
+	case CBird::BirdState::Destroying:
+
+		break;
+
 		/*case CBird::BirdState::OffScreen:
 		m_body->SetType(b2BodyType::b2_staticBody);
 		m_body->GetFixtureList()->SetSensor(true);
@@ -118,9 +122,12 @@ void CBird::FixedUpdate()
 /// <param name="_data"></param>
 void CBird::OnCollisionEnter(CollisionData _data)
 {
+	if (dynamic_cast<CBird*>(_data.other)) return;
+	if (_data.other->GetBody()->GetFixtureList()->IsSensor()) return;
+
 	if (m_state == CBird::BirdState::Moving)
 	{
-		m_state == CBird::BirdState::Destroying;
+		SetState(CBird::BirdState::Destroying);
 	}
 	if (_data.other->GetBody()->GetFixtureList()->IsSensor())
 		return;
