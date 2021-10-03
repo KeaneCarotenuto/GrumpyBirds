@@ -170,7 +170,7 @@ void CBird::DoMoving()
 
 			break;
 		}
-		//--Keane
+		//--
 
 		default:
 			//If behaviour has not been coded yet or there is no behaviour for this bird
