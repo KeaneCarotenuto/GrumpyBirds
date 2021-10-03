@@ -149,7 +149,9 @@ void CBird::DoMoving()
 			vel.y = m_body->GetLinearVelocity().y * 2.0f;
 			m_body->SetLinearVelocity(vel);
 			break;
-
+		case CBird::BirdType::Bomb:
+			
+			break;
 		default:
 			//If behaviour has not been coded yet or there is no behaviour for this bird
 			break;

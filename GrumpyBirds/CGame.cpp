@@ -44,6 +44,15 @@ void CGame::SetLevel(Level _newLevel)
 	Init();
 }
 
+/// <summary>
+/// Parse a 2D char array and build a Level layout from it
+/// [Wood/Stone] - Wood is breakable Stone is not.
+/// [b/B] = Block       [o/O] = Circle       [P] = Pig 
+/// [[/{] = Left pillar []/}] = Right pillar [l/|] = Pillar
+/// [_/=] = Platform 
+/// <para>Author: Nerys</para>
+/// </summary>
+/// <param name="_arr">A 2D array of characters</param>
 void CGame::PlaceLevel(char _arr[][20])
 {
 	float heightmult = 50.0f;
@@ -163,7 +172,7 @@ void CGame::Init()
 		CDestructibleBlock *circleBody = new CDestructibleBlock(m_world, {1700, 650}, 40, b2_dynamicBody, "Block_Stone_Circle_1.png", CDestructibleBlock::BlockType::STONE);
 		m_allBlocks.push_back(circleBody);
 		
-		char level[17][20] = {
+		char level[17][20] = { // The level in Text form, its much faster to design levels this way.
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
@@ -262,7 +271,7 @@ void CGame::Init()
 		
 		
 		
-		char level[17][20] = {
+		char level[17][20] = { // The level in Text form, its much faster to design levels this way.
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
