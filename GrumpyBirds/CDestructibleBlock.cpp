@@ -31,8 +31,6 @@ void CDestructibleBlock::Destroy()
 
 void CDestructibleBlock::OnCollisionEnter(CollisionData _data)
 {
-    if (dynamic_cast<CBird*>(_data.other) == nullptr) return;
-
     std::cout << "Block col\n";
 
     if ((_data.Momentum.Length() > 38.0f && m_type == BlockType::WOOD))
