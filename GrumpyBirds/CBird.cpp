@@ -83,12 +83,18 @@ void CBird::FixedUpdate()
 {
 	sf::Vector2f screenPos = util::WorldToScreen(m_body->GetPosition());
 
-	/*if (m_state != BirdState::OffScreen &&
-		(screenPos.x < 0 || screenPos.x > m_window->getSize().x ||
-		screenPos.y < 0 || screenPos.y > m_window->getSize().y)) {
-		SetState(BirdState::OffScreen);
-		m_body->SetTransform();
-	}*/
+	if (m_state != BirdState::Destroying) {
+		if ((screenPos.x < 0 || screenPos.x > m_window->getSize().x ||
+			screenPos.y < 0 || screenPos.y > m_window->getSize().y)) {
+			SetState(BirdState::Destroying);
+		}
+		else {
+			if (m_state == CBird::BirdState::Moving && util::Mag(GetBody()->GetLinearVelocity()) <= 0.1f) {
+				SetState(BirdState::Destroying);
+			}
+		}
+		
+	}
 
 	switch (m_state)
 	{
@@ -128,7 +134,7 @@ void CBird::OnCollisionEnter(CollisionData _data)
 
 	if (m_state == CBird::BirdState::Moving)
 	{
-		SetState(CBird::BirdState::Destroying);
+		//SetState(CBird::BirdState::Destroying);
 	}
 	if (_data.other->GetBody()->GetFixtureList()->IsSensor())
 		return;
@@ -162,7 +168,7 @@ void CBird::DoMoving()
 			CBird* egg = new CBird(m_world, util::V(GetBody()->GetPosition()) - sf::Vector2f(0, 30), 15, b2_dynamicBody, "Bird_Egg_1.png", CBird::BirdType::Dropper);
 			egg->SetState(CBird::BirdState::Destroying);
 			egg->m_name = "EGG";
-			egg->GetBody()->SetLinearVelocity({ 10.0f, -20.0f });
+			egg->GetBody()->SetLinearVelocity({ 0.0f, -20.0f });
 			egg->GetBody()->GetFixtureList()->SetDensity(egg->GetBody()->GetFixtureList()->GetDensity() * 2.0f);
 			egg->GetBody()->ResetMassData();
 			CGame::GetInstance()->AddBird(egg);

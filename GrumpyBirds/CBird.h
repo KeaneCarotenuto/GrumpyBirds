@@ -37,7 +37,6 @@ public:
 		Shooting,	// Being aimed
 		Moving,		// Has been shot and is moving through the air
 		Destroying, // Has hit something and is waiting to be destroyed
-		//OffScreen
 	};
 
 	CBird(b2World *_world, sf::Vector2f _position, float _radius, b2BodyType _type, std::string _imgName, BirdType _birdType);

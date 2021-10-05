@@ -455,49 +455,45 @@ void CGame::FixedUpdate()
 		_body->FixedUpdate();
 	}
 
-	if (m_currentShooter == nullptr)
-	{
-
-		// if (m_timeout == 0)
-		// {
-		// 	m_timeout = m_gameClock.getElapsedTime().asSeconds();
-		// }
-		// else
-		// {
-		// 	if (m_gameClock.getElapsedTime().asSeconds() - m_timeout >= m_maxTimeout)
-		// 	{
-		// 		Clear();
-		// 	}
-		// }
-	}
-	else
-	{
-		if (m_currentShooter->GetState() != CBird::BirdState::Shooting)
-			FindNewShooter();
-	}
+	if (!m_currentShooter || m_currentShooter->GetState() != CBird::BirdState::Shooting)
+		FindNewShooter();
 
 	if (m_world)
 		m_world->Step((float)timeStep, velocityIterations, positionIterations);
 
 
+	static float waitTimer = 0.0f;
+
 	//Check for win and lose conditions: Nerys
 	if (m_allPigs.empty())
 	{
-		if(m_currentLevel == Level::One)
-		{
-			Clear();
-			SetLevel(Level::Two);
+		if (waitTimer >= 2.0f) {
+			if (m_currentLevel == Level::One)
+			{
+				Clear();
+				SetLevel(Level::Two);
+				waitTimer = 0.0f;
+			}
+			else
+			{
+				Clear();
+			}
 		}
-		else
-		{
-			Clear();
+		else {
+			waitTimer += (1.0f / 60.0f);
 		}
-
 	}
 	else if (m_allBirds.empty()) //Nerys
 	{
-		Clear();
-		SetLevel(m_currentLevel);
+		if (waitTimer >= 5.0f) {
+			Clear();
+			SetLevel(m_currentLevel);
+			waitTimer = 0.0f;
+		}
+		else {
+			waitTimer += (1.0f / 60.0f);
+		}
+		
 	}
 	
 }
