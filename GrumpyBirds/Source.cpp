@@ -41,7 +41,7 @@ sf::RectangleShape background;
 
 /// <summary>
 /// Setup and then running of the main loop.
-/// <para>Author: Keane</para>
+/// <para>Author: Keane, Nerys</para>
 /// </summary>
 /// <returns></returns>
 int main()

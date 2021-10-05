@@ -77,7 +77,7 @@ void CBird::Destroy()
 
 /// <summary>
 /// Fixed update for bird
-/// <para>Author: Keane</para>
+/// <para>Author: Keane, Nerys</para>
 /// </summary>
 void CBird::FixedUpdate()
 {
@@ -118,7 +118,7 @@ void CBird::FixedUpdate()
 
 /// <summary>
 /// Collisions for bird
-/// <para>Author: Keane</para>
+/// <para>Author: Keane, Nerys</para>
 /// </summary>
 /// <param name="_data"></param>
 void CBird::OnCollisionEnter(CollisionData _data)
@@ -142,7 +142,6 @@ void CBird::OnCollisionEnter(CollisionData _data)
 /// </summary>
 void CBird::DoMoving()
 {
-	//std::cout << "Do Moving\n";
 	//--Nerys-----------------------------------------------------------------------------------------------------------
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && !m_hasUsedAbility && m_state == CBird::BirdState::Moving) //Check for mouse press and valid states
 	{
@@ -163,7 +162,7 @@ void CBird::DoMoving()
 			CBird* egg = new CBird(m_world, util::V(GetBody()->GetPosition()) - sf::Vector2f(0, 30), 15, b2_dynamicBody, "Bird_Egg_1.png", CBird::BirdType::Dropper);
 			egg->SetState(CBird::BirdState::Destroying);
 			egg->m_name = "EGG";
-			egg->GetBody()->SetLinearVelocity({ 0, -20.0f });
+			egg->GetBody()->SetLinearVelocity({ 10.0f, -20.0f });
 			egg->GetBody()->GetFixtureList()->SetDensity(egg->GetBody()->GetFixtureList()->GetDensity() * 2.0f);
 			egg->GetBody()->ResetMassData();
 			CGame::GetInstance()->AddBird(egg);

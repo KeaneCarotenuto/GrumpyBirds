@@ -128,7 +128,7 @@ void CGame::PlaceLevel(char _arr[][20])
 
 /// <summary>
 /// Initialises level when changing
-/// <para>Author: Keane</para>
+/// <para>Author: Keane, Nerys</para>
 /// </summary>
 void CGame::Init()
 {
@@ -140,18 +140,20 @@ void CGame::Init()
 
 	switch (m_currentLevel)
 	{
-	case Level::One:
+	case Level::One: //Nerys
 	{
 
 		sf::Vector2f shootPos = {200, 200};
+
+		CBird *bird2 = new CBird(m_world, {50, 35}, 25, b2_dynamicBody, "Bird_Regular_1.png", CBird::BirdType::Regular);
+		m_allBirds.push_back(bird2);
+		bird2->SetShootPos(shootPos);
 
 		CBird *bird1 = new CBird(m_world, {100, 35}, 25, b2_dynamicBody, "Bird_Fast_1.png", CBird::BirdType::Fast);
 		m_allBirds.push_back(bird1);
 		bird1->SetShootPos(shootPos);
 
-		CBird *bird2 = new CBird(m_world, {50, 35}, 25, b2_dynamicBody, "Bird_Regular_1.png", CBird::BirdType::Regular);
-		m_allBirds.push_back(bird2);
-		bird2->SetShootPos(shootPos);
+		
 
 		
 
@@ -239,18 +241,20 @@ void CGame::Init()
 		break;
 	}
 
-	case Level::Two:
+	case Level::Two: //Nerys
 	{
 
 		sf::Vector2f shootPos = {200, 200};
+
+		CBird *bird2 = new CBird(m_world, {50, 35}, 25, b2_dynamicBody, "Bird_Dropper_1.png", CBird::BirdType::Dropper);
+		m_allBirds.push_back(bird2);
+		bird2->SetShootPos(shootPos);
 
 		CBird *bird1 = new CBird(m_world, {100, 35}, 25, b2_dynamicBody, "Bird_Fast_1.png", CBird::BirdType::Fast);
 		m_allBirds.push_back(bird1);
 		bird1->SetShootPos(shootPos);
 
-		CBird *bird2 = new CBird(m_world, {50, 35}, 25, b2_dynamicBody, "Bird_Dropper_1.png", CBird::BirdType::Dropper);
-		m_allBirds.push_back(bird2);
-		bird2->SetShootPos(shootPos);
+		
 
 		
 
@@ -476,7 +480,7 @@ void CGame::FixedUpdate()
 		m_world->Step((float)timeStep, velocityIterations, positionIterations);
 
 
-	//Check for win and lose conditions
+	//Check for win and lose conditions: Nerys
 	if (m_allPigs.empty())
 	{
 		if(m_currentLevel == Level::One)
@@ -490,7 +494,7 @@ void CGame::FixedUpdate()
 		}
 
 	}
-	else if (m_allBirds.empty())
+	else if (m_allBirds.empty()) //Nerys
 	{
 		Clear();
 		SetLevel(m_currentLevel);
