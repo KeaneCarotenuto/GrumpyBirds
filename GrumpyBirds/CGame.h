@@ -42,7 +42,7 @@ public:
 	void SetLevel(Level _newLevel);
 
 	void AddBird(CBird* _bird) { if (_bird) m_allBirds.push_back(_bird); };
-
+	bool GetLevelExists(){return m_isInitialised;};
 	void Init();
 	void FindNewShooter();
 	void ClearDeleted();

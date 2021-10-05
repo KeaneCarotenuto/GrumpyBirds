@@ -71,7 +71,7 @@ void CGame::PlaceLevel(char _arr[][20])
 				m_allBlocks.push_back(block);
 				break;
 			case '|':
-				block = new CDestructibleBlock(m_world, {((j+10) * widthmult), 825.0f - (i * heightmult)}, {20, 50}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+				block = new CDestructibleBlock(m_world, {((j+10) * widthmult), 825.0f - (i * heightmult)}, {30, 50}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
 				m_allBlocks.push_back(block);
 				break;
 			case '=':
@@ -87,11 +87,11 @@ void CGame::PlaceLevel(char _arr[][20])
 				m_allPigs.push_back(pig);
 				break;
 			case '{':
-				block = new CDestructibleBlock(m_world, {((j+10) * widthmult) - 10.0f, 825.0f - (i * heightmult)}, {20, 50}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+				block = new CDestructibleBlock(m_world, {((j+10) * widthmult) - 10.0f, 825.0f - (i * heightmult)}, {30, 50}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
 				m_allBlocks.push_back(block);
 				break;
 			case '}':
-				block = new CDestructibleBlock(m_world, {((j+10) * widthmult) + 10.0f, 825.0f - (i * heightmult)}, {20, 50}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+				block = new CDestructibleBlock(m_world, {((j+10) * widthmult) + 10.0f, 825.0f - (i * heightmult)}, {30, 50}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
 				m_allBlocks.push_back(block);
 				break;
 			case 'b':
@@ -99,7 +99,7 @@ void CGame::PlaceLevel(char _arr[][20])
 				m_allBlocks.push_back(block);
 				break;
 			case 'l':
-				block = new CDestructibleBlock(m_world, {((j+10) * widthmult), 825.0f - (i * heightmult)}, {20, 50}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
+				block = new CDestructibleBlock(m_world, {((j+10) * widthmult), 825.0f - (i * heightmult)}, {30, 50}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
 				m_allBlocks.push_back(block);
 				break;
 			case '_':
@@ -111,11 +111,11 @@ void CGame::PlaceLevel(char _arr[][20])
 				m_allBlocks.push_back(block);
 				break;
 			case '[':
-				block = new CDestructibleBlock(m_world, {((j+10) * widthmult) - 10.0f, 825.0f - (i * heightmult)}, {20, 50}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
+				block = new CDestructibleBlock(m_world, {((j+10) * widthmult) - 10.0f, 825.0f - (i * heightmult)}, {30, 50}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
 				m_allBlocks.push_back(block);
 				break;
 			case ']':
-				block = new CDestructibleBlock(m_world, {((j+10) * widthmult) + 10.0f, 825.0f - (i * heightmult)}, {20, 50}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
+				block = new CDestructibleBlock(m_world, {((j+10) * widthmult) + 10.0f, 825.0f - (i * heightmult)}, {30, 50}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
 				m_allBlocks.push_back(block);
 				break;
 
@@ -454,17 +454,17 @@ void CGame::FixedUpdate()
 	if (m_currentShooter == nullptr)
 	{
 
-		if (m_timeout == 0)
-		{
-			m_timeout = m_gameClock.getElapsedTime().asSeconds();
-		}
-		else
-		{
-			if (m_gameClock.getElapsedTime().asSeconds() - m_timeout >= m_maxTimeout)
-			{
-				Clear();
-			}
-		}
+		// if (m_timeout == 0)
+		// {
+		// 	m_timeout = m_gameClock.getElapsedTime().asSeconds();
+		// }
+		// else
+		// {
+		// 	if (m_gameClock.getElapsedTime().asSeconds() - m_timeout >= m_maxTimeout)
+		// 	{
+		// 		Clear();
+		// 	}
+		// }
 	}
 	else
 	{
@@ -474,6 +474,28 @@ void CGame::FixedUpdate()
 
 	if (m_world)
 		m_world->Step((float)timeStep, velocityIterations, positionIterations);
+
+
+	//Check for win and lose conditions
+	if (m_allPigs.empty())
+	{
+		if(m_currentLevel == Level::One)
+		{
+			Clear();
+			SetLevel(Level::Two);
+		}
+		else
+		{
+			Clear();
+		}
+
+	}
+	else if (m_allBirds.empty())
+	{
+		Clear();
+		SetLevel(m_currentLevel);
+	}
+	
 }
 
 /// <summary>

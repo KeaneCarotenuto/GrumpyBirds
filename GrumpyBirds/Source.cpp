@@ -35,6 +35,7 @@ CGame *game = CGame::GetInstance();
 sf::RenderWindow *util::window = nullptr;
 
 sf::Text instructions;
+sf::Text menu;
 
 sf::RectangleShape background;
 
@@ -77,10 +78,15 @@ int main()
 	instructions.setPosition({20, 20});
 	instructions.setCharacterSize(25);
 	instructions.setString(
-		"Press [1] to start the level.\n"
-		"Press [2] to clear the level.\n"
-		"Drag and Release the raised bird to shoot.\n"
-		"Level will clear after 5 seconds of last bird being shot.");
+		"Press [2] to Reset the Game.\n"
+		"Drag and Release the raised bird to shoot.\n");
+
+	menu.setFont(*CResourceManager::GetFont("angrybirds.ttf"));
+	menu.setPosition({500, 100});
+	menu.setCharacterSize(40);
+	menu.setString(
+		"                Grumpy Birds\n"
+		"Press [1] to start the 1st level\n");
 	sf::Texture bgTexture;
 	bgTexture.loadFromImage(*CResourceManager::GetImage("Background.jpg"));
 	background.setTexture(&bgTexture);
@@ -143,7 +149,7 @@ int main()
 			{
 				if (newEvent.key.code == sf::Keyboard::Num1)
 				{
-					game->SetLevel(CGame::Level::Two);
+					game->SetLevel(CGame::Level::One);
 				}
 				if (newEvent.key.code == sf::Keyboard::Num2)
 				{
@@ -175,7 +181,9 @@ void Draw()
 	}
 	game->DrawAllTemps();
 
-	window->draw(instructions);
+	
+	if(!CGame::GetInstance()->GetLevelExists()) window->draw(menu);
+	else window->draw(instructions);
 
 	window->display();
 }
