@@ -72,7 +72,7 @@ namespace util {
 	}
 
 	static double GetSecondsPast() {
-		double test = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+		double test = (double)std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
 		return  test / 1000.0;
 	}
