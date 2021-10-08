@@ -138,8 +138,6 @@ void CBird::OnCollisionEnter(CollisionData _data)
 	}
 	if (_data.other->GetBody()->GetFixtureList()->IsSensor())
 		return;
-
-	std::cout << "Bird col\n";
 }
 
 /// <summary>
@@ -162,7 +160,7 @@ void CBird::DoMoving()
 			vel.y = m_body->GetLinearVelocity().y * 2.0f;
 			m_body->SetLinearVelocity(vel);
 			break;
-
+	//--------------------------------------------------------------------------------------------------------------------
 		//--Keane
 		case CBird::BirdType::Dropper: {
 			CBird* egg = new CBird(m_world, util::V(GetBody()->GetPosition()) - sf::Vector2f(0, 30), 15, b2_dynamicBody, "Bird_Egg_1.png", CBird::BirdType::Dropper);
@@ -182,7 +180,6 @@ void CBird::DoMoving()
 			break;
 		}
 	}
-	//--------------------------------------------------------------------------------------------------------------------
 }
 
 /// <summary>
@@ -286,6 +283,8 @@ void CBird::PullBack()
 		circ->setPosition(util::WorldToScreen(pos));
 		circ->setOrigin(circ->getLocalBounds().width / 2.0f, circ->getLocalBounds().height / 2.0f);
 		CGame::GetInstance()->DrawTempItem(circ);
+		circ->setOutlineThickness(1.0f);
+		circ->setOutlineColor(sf::Color::Black);
 		circ = nullptr;
 	}
 }

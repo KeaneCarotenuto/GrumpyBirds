@@ -102,6 +102,10 @@ void CGame::PlaceLevel(char _arr[][20])
 				block = new CDestructibleBlock(m_world, {((j+10) * widthmult), 825.0f - (i * heightmult)}, {30, 50}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
 				m_allBlocks.push_back(block);
 				break;
+			case 't':
+				block = new CDestructibleBlock(m_world, { ((j + 10) * widthmult), 825.0f - (i * heightmult) }, { 30, 150 }, b2_dynamicBody, "Block_Wood_Regular_2.png", CDestructibleBlock::BlockType::WOOD);
+				m_allBlocks.push_back(block);
+				break;
 			case '_':
 				block = new CDestructibleBlock(m_world, {(j+10) * widthmult, 825.0f - ((i * heightmult))}, {150, 15}, b2_dynamicBody, "Block_Wood_Regular_1.png", CDestructibleBlock::BlockType::WOOD);
 				m_allBlocks.push_back(block);
@@ -157,7 +161,7 @@ void CGame::Init()
 
 		
 
-		CDestructibleBlock *anchor = new CDestructibleBlock(m_world, {900, 650}, {10, 10}, b2_staticBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+		CDestructibleBlock *anchor = new CDestructibleBlock(m_world, {900, 650}, {30, 30}, b2_staticBody, "Block_Stone_Cog_1.png", CDestructibleBlock::BlockType::STONE);
 		m_allBlocks.push_back(anchor);
 		CDestructibleBlock *rectBody = new CDestructibleBlock(m_world, {1100, 650}, {200, 10}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
 		rectBody->GetBody()->GetFixtureList()[0].SetDensity(0.1f);
@@ -258,14 +262,15 @@ void CGame::Init()
 
 		
 
-		CDestructibleBlock *anchor = new CDestructibleBlock(m_world, {750, 183}, {10, 10}, b2_staticBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+		CDestructibleBlock *anchor = new CDestructibleBlock(m_world, {750, 183}, {50, 50}, b2_staticBody, "Block_Stone_Cog_1.png", CDestructibleBlock::BlockType::STONE);
 		m_allBlocks.push_back(anchor);
-		CDestructibleBlock *rectBody = new CDestructibleBlock(m_world, {600, 183}, {200, 50}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
+		anchor->GetBody()->GetFixtureList()->SetSensor(true);
+		CDestructibleBlock *rectBody = new CDestructibleBlock(m_world, {600, 183}, {200, 50}, b2_dynamicBody, "Block_Stone_Lever_1.png", CDestructibleBlock::BlockType::STONE);
 		m_allBlocks.push_back(rectBody);
 		rectBody->GetBody()->SetGravityScale(15.0f);
 		
-		CDestructibleBlock *anchor2 = new CDestructibleBlock(m_world, {1200, 25}, {10, 10}, b2_staticBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
-		m_allBlocks.push_back(anchor);
+		CDestructibleBlock *anchor2 = new CDestructibleBlock(m_world, {1200, 25}, {50, 50}, b2_staticBody, "Block_Stone_Cog_1.png", CDestructibleBlock::BlockType::STONE);
+		m_allBlocks.push_back(anchor2);
 		CDestructibleBlock *rectBody2 = new CDestructibleBlock(m_world, {1300, 25}, {300, 30}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
 		m_allBlocks.push_back(rectBody2);
 		CDestructibleBlock *rectBody3 = new CDestructibleBlock(m_world, {1450, 25}, {20, 30}, b2_dynamicBody, "Block_Stone_Regular_1.png", CDestructibleBlock::BlockType::STONE);
@@ -290,9 +295,9 @@ void CGame::Init()
 			{' ', ' ', ' ', '_', ' ', ' ', ' ', ' ', 'B', ' ', ' ', 'B', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', '{', 'B', 'P', ' ', 'B', '}', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '_', ' ', ' ', '_', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
-			{' ', ' ', 'l', ' ', ' ', '{', ' ', '{', ' ', '}', '{', ' ', '}', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
-			{' ', ' ', 'l', 'P', ' ', '{', ' ', '{', ' ', '}', '{', ' ', '}', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
-			{' ', ' ', 'l', '|', ' ', '{', ' ', 'B', 'B', 'B', 'B', 'B', 'B', ' ', ' ', ' ', ' ', ' ', ' ', 'O'}};
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', '{', ' ', '}', '{', ' ', '}', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', 't', 'P', ' ', '{', ' ', '{', ' ', '}', '{', ' ', '}', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+			{' ', ' ', ' ', '|', ' ', '{', ' ', 'B', 'B', 'B', 'B', 'B', 'B', ' ', ' ', ' ', ' ', ' ', ' ', 'O'}};
 		PlaceLevel(level);
 
 		b2RevoluteJointDef revoluteJointDef1;
@@ -455,42 +460,94 @@ void CGame::FixedUpdate()
 		_body->FixedUpdate();
 	}
 
+	//Find new bird to shoot
 	if (!m_currentShooter || m_currentShooter->GetState() != CBird::BirdState::Shooting)
 		FindNewShooter();
 
+	//Do physics
 	if (m_world)
 		m_world->Step((float)timeStep, velocityIterations, positionIterations);
 
 
 	static float waitTimer = 0.0f;
 
-	//Check for win and lose conditions: Nerys
+	//Check for win and lose conditions, with delay, and end game text
 	if (m_allPigs.empty())
 	{
+		//If all pigs dead, display win
 		if (waitTimer >= 2.0f) {
+			sf::Text* endTxt = new sf::Text();
+			endTxt->setFont(*CResourceManager::GetFont("angrybirds.ttf"));
+			endTxt->setPosition({ 500, 100 });
+			endTxt->setCharacterSize(40);
+
 			if (m_currentLevel == Level::One)
 			{
-				Clear();
-				SetLevel(Level::Two);
-				waitTimer = 0.0f;
+				endTxt->setString(
+					"                Complete!\n"
+					"Press [N] to go to the next level\n"
+					"Press [M] to go to the menu");
+				DrawTempItem(endTxt);
+
+				//Next, or menu
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::N)) {
+					Clear();
+					SetLevel(Level::Two);
+					waitTimer = 0.0f;
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) {
+					Clear();
+				}
+				
 			}
 			else
 			{
-				Clear();
+				//Only Menu after level 2
+				endTxt->setString(
+					"                Complete!\n"
+					"Press [M] to go to the menu");
+				DrawTempItem(endTxt);
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) {
+					Clear();
+				}
 			}
 		}
 		else {
 			waitTimer += (1.0f / 60.0f);
 		}
 	}
-	else if (m_allBirds.empty()) //Nerys
+	else if (m_allBirds.empty())
 	{
+		//if all birds gone, wait for a bit
+
+		sf::Text* endTxt = new sf::Text();
+		endTxt->setFont(*CResourceManager::GetFont("angrybirds.ttf"));
+		endTxt->setPosition({ 500, 100 });
+		endTxt->setCharacterSize(40);
+
 		if (waitTimer >= 5.0f) {
-			Clear();
-			SetLevel(m_currentLevel);
-			waitTimer = 0.0f;
+			endTxt->setString(
+				"                Failed!\n"
+				"Press [R] to go to retry\n"
+				"Press [M] to go to the menu");
+			DrawTempItem(endTxt);
+
+			//Restart, or menu
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+				Clear();
+				SetLevel(m_currentLevel);
+				waitTimer = 0.0f;
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) {
+				Clear();
+			}
 		}
 		else {
+			endTxt->setString(
+				"                Checking...\n                "
+				+ std::to_string(5 - (int)waitTimer) + "s");
+			DrawTempItem(endTxt);
 			waitTimer += (1.0f / 60.0f);
 		}
 		

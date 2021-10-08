@@ -39,14 +39,17 @@ public:
 	void SetWindow(sf::RenderWindow *_wind) { m_window = _wind; };
 	sf::RenderWindow *GetWindow() { return m_window; };
 
+	void Init();
 	void SetLevel(Level _newLevel);
+	bool GetLevelExists() { return m_isInitialised; };
+	Level GetCurrentLevel() { return m_currentLevel; };
 
 	void AddBird(CBird* _bird) { if (_bird) m_allBirds.push_back(_bird); };
-	bool GetLevelExists(){return m_isInitialised;};
-	void Init();
 	void FindNewShooter();
+
 	void ClearDeleted();
 	void Clear();
+
 	void FixedUpdate();
 
 	/// <summary>

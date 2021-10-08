@@ -22,7 +22,6 @@ void CPig::Destroy() {
 }
 
 void CPig::OnCollisionEnter(CollisionData _data) {
-    std::cout << "Pig col\n";
 
     if (_data.Momentum.Length() > 10.0f)
     {

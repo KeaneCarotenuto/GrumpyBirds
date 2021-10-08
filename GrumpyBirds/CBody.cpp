@@ -180,7 +180,6 @@ void CBody::FixedUpdate()
 /// <param name="_data"></param>
 void CBody::OnCollisionEnter(CollisionData _data)
 {
-    std::cout << "Body col\n";
 }
 
 /// <summary>

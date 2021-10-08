@@ -67,20 +67,26 @@ int main()
 	CResourceManager::LoadImage("Bird_Egg_1.png");
 	CResourceManager::LoadImage("Pig_Regular_1.png");
 	CResourceManager::LoadImage("Block_Wood_Regular_1.png");
+	CResourceManager::LoadImage("Block_Wood_Regular_2.png");
 	CResourceManager::LoadImage("Block_Wood_Circle_1.png");
 	CResourceManager::LoadImage("Block_Stone_Regular_1.png");
+	CResourceManager::LoadImage("Block_Stone_Lever_1.png");
 	CResourceManager::LoadImage("Block_Stone_Circle_1.png");
+	CResourceManager::LoadImage("Block_Stone_Cog_1.png");
 	CResourceManager::LoadImage("Background.jpg");
 
 	CResourceManager::LoadFont("angrybirds.ttf");
 
+	//In game instructions
 	instructions.setFont(*CResourceManager::GetFont("angrybirds.ttf"));
 	instructions.setPosition({20, 20});
 	instructions.setCharacterSize(25);
 	instructions.setString(
-		"Press [2] to Reset the Game.\n"
+		"Press [M] to Return to the Menu.\n"
+		"Press [R] to Restart to the Level.\n"
 		"Drag and Release the raised bird to shoot.\n");
 
+	//Menu - Nerys --
 	menu.setFont(*CResourceManager::GetFont("angrybirds.ttf"));
 	menu.setPosition({500, 100});
 	menu.setCharacterSize(40);
@@ -91,9 +97,7 @@ int main()
 	bgTexture.loadFromImage(*CResourceManager::GetImage("Background.jpg"));
 	background.setTexture(&bgTexture);
 	background.setSize(sf::Vector2f(1600.0f, 930.0f));
-
-	//Start Game Scene up
-	//InitGameScene();
+	//--
 
 	//Manages the FixedUpdate() timing
 	double stepTime = 0;
@@ -145,13 +149,18 @@ int main()
 				window->close();
 			}
 
+			//Navigation
 			if (newEvent.type == sf::Event::KeyPressed)
 			{
-				if (newEvent.key.code == sf::Keyboard::Num1)
+				if (!game->GetLevelExists() && newEvent.key.code == sf::Keyboard::Num1)
 				{
 					game->SetLevel(CGame::Level::One);
 				}
-				if (newEvent.key.code == sf::Keyboard::Num2)
+				if (game->GetLevelExists() && newEvent.key.code == sf::Keyboard::R)
+				{
+					game->SetLevel(game->GetCurrentLevel());
+				}
+				if (game->GetLevelExists() && newEvent.key.code == sf::Keyboard::M)
 				{
 					game->Clear();
 				}
