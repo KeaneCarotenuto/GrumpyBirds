@@ -84,7 +84,8 @@ int main()
 	instructions.setString(
 		"Press [M] to Return to the Menu.\n"
 		"Press [R] to Restart to the Level.\n"
-		"Drag and Release the raised bird to shoot.\n");
+		"Drag and Release the raised bird to shoot.\n"
+		"Destroy all Pigs to win. \nUse all birds without doing this, to lose.");
 
 	//Menu - Nerys --
 	menu.setFont(*CResourceManager::GetFont("angrybirds.ttf"));
